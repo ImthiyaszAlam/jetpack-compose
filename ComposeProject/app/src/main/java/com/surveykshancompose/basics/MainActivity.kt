@@ -1,8 +1,7 @@
-package com.surveykshancompose
+package com.surveykshancompose.basics
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border

@@ -1,4 +1,4 @@
-package com.surveykshancompose
+package com.surveykshancompose.basics
 
 import android.os.Bundle
 import androidx.activity.compose.setContent

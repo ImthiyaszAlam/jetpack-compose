@@ -13,21 +13,22 @@
         android:theme="@style/Theme.ComposeProject"
         tools:targetApi="31">
         <activity
-            android:name=".SnackbarActivity"
+            android:name=".effect_handlers.DisposableEffect"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".StateActivity" />
-        <activity android:name=".StyleTextActivity" />
-        <activity android:name=".ImageCardActivity" />
-        <activity android:name=".ModifierActivity" />
-        <activity android:name=".ComposeActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".basics.ListActivity" />
+        <activity android:name=".basics.SnackbarActivity" />
+        <activity android:name=".basics.StateActivity" />
+        <activity android:name=".basics.StyleTextActivity" />
+        <activity android:name=".basics.ImageCardActivity" />
+        <activity android:name=".basics.ModifierActivity" />
+        <activity android:name=".basics.ComposeActivity" />
+        <activity android:name=".basics.MainActivity" />
+        <activity android:name=".basics.ConstraintLayoutActivity" />
     </application>
 
 </manifest>

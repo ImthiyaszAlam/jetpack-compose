@@ -37,8 +37,8 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"  // Make sure this matches the Compose version
-        kotlinCompilerVersion = "1.9.0"  // Version of Kotlin
+        kotlinCompilerExtensionVersion = "1.5.14"
+        kotlinCompilerVersion = "1.9.0"
     }
 
     kotlinOptions {
@@ -71,4 +71,6 @@ dependencies {
 
     implementation(libs.neumorphism)
     implementation(libs.androidx.multidex)
+    implementation(libs.androidx.constraintlayout.compose)
+
 }
