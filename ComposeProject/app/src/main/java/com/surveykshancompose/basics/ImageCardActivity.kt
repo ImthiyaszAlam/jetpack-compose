@@ -1,6 +1,7 @@
 package com.surveykshancompose.basics
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
@@ -26,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.surveykshancompose.R
 
-class ImageCardActivity : AppCompatActivity() {
+class ImageCardActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -59,15 +60,19 @@ fun genCardImage(
                 contentScale = ContentScale.Crop
             )
 
-            Box(modifier=Modifier
-                .fillMaxSize()
-                .background(Brush.verticalGradient(
-                    colors = listOf(
-                        Color.Transparent,
-                        Color.Black
-                    ),
-                    startY = 300f
-                )))
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.Black
+                            ),
+                            startY = 300f
+                        )
+                    )
+            )
 
             Box(
                 modifier = Modifier
