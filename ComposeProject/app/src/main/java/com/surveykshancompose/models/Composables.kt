@@ -1,6 +1,7 @@
 package com.surveykshancompose.models
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,6 +28,7 @@ import com.surveykshancompose.R
 @Preview
 @Composable
 fun PreviewItem() {
+    // Card1()
     BlogCategory(R.drawable.pretty_soul, "title1", "subtitle2")
 }
 
@@ -71,4 +73,37 @@ private fun ItemDescription(title: String, subTitle: String, modifier: Modifier)
             fontWeight = FontWeight.Thin
         )
     }
+}
+
+
+@Composable
+fun Card1() {
+
+    Card(
+        elevation = CardDefaults.cardElevation(8.dp),
+        modifier = Modifier
+            .border(1.dp, Color.Blue)
+            .background(Color.Red)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.background(Color.Red)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.pretty_soul),
+                contentDescription = "", modifier = Modifier
+                    .size(40.dp)
+                    .clip(CircleShape)
+            )
+            Text(
+                text = "Pretty soul",
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(5.dp)
+
+            )
+        }
+    }
+
 }
