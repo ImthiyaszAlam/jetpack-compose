@@ -28,13 +28,3 @@ class ListActivity : AppCompatActivity() {
 }
 
 
-@Preview
-@Composable
-fun ListActivities() {
-    Text(
-        text = "Start",
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier
-            .background(Color.Black)
-    )
-}

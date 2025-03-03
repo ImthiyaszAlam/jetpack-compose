@@ -29,7 +29,12 @@ import com.surveykshancompose.R
 @Composable
 fun PreviewItem() {
     // Card1()
-    BlogCategory(R.drawable.pretty_soul, "title1", "subtitle2")
+    //BlogCategory(R.drawable.pretty_soul, "title1", "subtitle2")
+    Column {
+        getCategoryList().map { item ->
+            BlogCategory(item.image, item.title, item.subtitle)
+        }
+    }
 }
 
 
@@ -73,6 +78,18 @@ private fun ItemDescription(title: String, subTitle: String, modifier: Modifier)
             fontWeight = FontWeight.Thin
         )
     }
+}
+
+
+fun getCategoryList(): MutableList<Categories> {
+    val list = mutableListOf<Categories>()
+    list.add(Categories(R.drawable.pretty_soul, "title-1", "subtitle1"))
+    list.add(Categories(R.drawable.pretty_soul, "title-1", "subtitle1"))
+    list.add(Categories(R.drawable.pretty_soul, "title-1", "subtitle1"))
+    list.add(Categories(R.drawable.pretty_soul, "title-1", "subtitle1"))
+    list.add(Categories(R.drawable.pretty_soul, "title-1", "subtitle1"))
+
+    return list
 }
 
 
