@@ -66,5 +66,7 @@ dependencies {
 
     //For Compose Icons
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
+    //Gson
+    implementation("com.google.code.gson:gson:2.11.0")
 
 }

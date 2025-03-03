@@ -2,6 +2,7 @@ package com.imthiyas.quoteapp.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,13 +29,16 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.motion.widget.MotionScene.Transition.TransitionOnClick
+import com.imthiyas.quoteapp.models.Quote
 
 
 @Composable
-fun QuoteItem() {
+fun QuoteItem(quote: Quote, onClick: () -> Unit) {
     Card(
         elevation = CardDefaults.cardElevation(4.dp),
         modifier = Modifier.padding(8.dp)
+            .clickable { onClick() }
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
             Image(
@@ -51,7 +55,7 @@ fun QuoteItem() {
 
             Column() {
                 Text(
-                    text = "The quote written by author",
+                    text = quote.text,
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 8.dp)
                 )
@@ -63,69 +67,7 @@ fun QuoteItem() {
                 )
 
                 Text(
-                    text = "Author",
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Thin,
-                    modifier = Modifier.padding(top = 4.dp)
-                )
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-private fun QuoteDetails() {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .padding(4.dp)
-            .fillMaxSize(1F)
-            .background(
-                Brush.sweepGradient(
-                    colors = listOf(
-                        Color.LightGray,
-                        Color.Gray
-                    )
-                )
-            )
-    ) {
-        Card(
-            elevation = CardDefaults.cardElevation(8.dp),
-            modifier = Modifier.padding(6.dp)
-        ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                // horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .padding(16.dp, 24.dp)
-            ) {
-                Image(
-                    imageVector = Icons.Filled.FormatQuote,
-                    colorFilter = ColorFilter.tint(Color.White),
-                    alignment = Alignment.TopStart,
-                    contentDescription = "QuoteImage",
-                    modifier = Modifier
-                        .size(40.dp)
-                        .rotate(180F)
-                        .background(Color.Black)
-                )
-                Spacer(modifier = Modifier.padding(4.dp))
-
-                Text(
-                    text = "The quote written by author",
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 8.dp)
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth(.4F)
-                        .height(1.dp)
-                        .background(Color.Black)
-                )
-
-                Text(
-                    text = "Author",
+                    text = quote.author,
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Thin,
                     modifier = Modifier.padding(top = 4.dp)
