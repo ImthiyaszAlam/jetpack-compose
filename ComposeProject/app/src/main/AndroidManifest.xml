@@ -15,7 +15,7 @@
         android:theme="@style/Theme.ComposeProject"
         tools:targetApi="31">
         <activity
-            android:name=".basix.ListActivity"
+            android:name=".ui.StateObjectActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".basix.ModifierActivity"
+            android:name=".ui.RecompositionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,15 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".effect_handlers.DisposableEffect"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".basix.ListActivity" />
+        <activity android:name=".basix.ModifierActivity" />
+        <activity android:name=".effect_handlers.DisposableEffect" />
         <activity android:name=".basics.ListActivity" />
         <activity android:name=".basics.SnackbarActivity" />
         <activity android:name=".basics.StateActivity" />

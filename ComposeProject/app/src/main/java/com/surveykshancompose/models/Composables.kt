@@ -7,7 +7,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -30,8 +34,14 @@ import com.surveykshancompose.R
 fun PreviewItem() {
     // Card1()
     //BlogCategory(R.drawable.pretty_soul, "title1", "subtitle2")
-    Column {
+   /* Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         getCategoryList().map { item ->
+            BlogCategory(item.image, item.title, item.subtitle)
+        }
+    }*/
+
+    LazyColumn {
+        items(getCategoryList()){item->
             BlogCategory(item.image, item.title, item.subtitle)
         }
     }
@@ -88,6 +98,11 @@ fun getCategoryList(): MutableList<Categories> {
     list.add(Categories(R.drawable.pretty_soul, "title-1", "subtitle1"))
     list.add(Categories(R.drawable.pretty_soul, "title-1", "subtitle1"))
     list.add(Categories(R.drawable.pretty_soul, "title-1", "subtitle1"))
+    list.add(Categories(R.drawable.pretty_soul, "title-1", "subtitle1"))
+    list.add(Categories(R.drawable.pretty_soul, "title-1", "subtitle1"))
+    list.add(Categories(R.drawable.pretty_soul, "title-1", "subtitle1"))
+    list.add(Categories(R.drawable.pretty_soul, "title-1", "subtitle1"))
+    list.add(Categories(R.drawable.pretty_soul, "title-5", "subtitle1"))
 
     return list
 }
