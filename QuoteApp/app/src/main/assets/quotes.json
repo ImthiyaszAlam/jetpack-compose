@@ -1,42 +1,206 @@
 [
   {
-    "text": "The only limit to our realization of tomorrow is our doubts of today.",
-    "author": "Franklin D. Roosevelt"
+    "text": "The only way to do great work is to love what you do.",
+    "author": "Steve Jobs"
+  },
+  {
+    "text": "In the middle of every difficulty lies opportunity.",
+    "author": "Albert Einstein"
+  },
+  {
+    "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+    "author": "Winston Churchill"
   },
   {
     "text": "Do what you can, with what you have, where you are.",
     "author": "Theodore Roosevelt"
   },
   {
-    "text": "Happiness depends upon ourselves.",
-    "author": "Aristotle"
+    "text": "It does not matter how slowly you go as long as you do not stop.",
+    "author": "Confucius"
+  },
+  {
+    "text": "Hardships often prepare ordinary people for an extraordinary destiny.",
+    "author": "C.S. Lewis"
+  },
+  {
+    "text": "Dream big and dare to fail.",
+    "author": "Norman Vaughan"
   },
   {
     "text": "Act as if what you do makes a difference. It does.",
     "author": "William James"
   },
   {
+    "text": "Success is getting what you want. Happiness is wanting what you get.",
+    "author": "Dale Carnegie"
+  },
+  {
+    "text": "The best way to predict the future is to create it.",
+    "author": "Peter Drucker"
+  },
+  {
+    "text": "Believe you can and you're halfway there.",
+    "author": "Theodore Roosevelt"
+  },
+  {
+    "text": "Keep your face always toward the sunshine—and shadows will fall behind you.",
+    "author": "Walt Whitman"
+  },
+  {
+    "text": "What lies behind us and what lies before us are tiny matters compared to what lies within us.",
+    "author": "Ralph Waldo Emerson"
+  },
+  {
+    "text": "Happiness depends upon ourselves.",
+    "author": "Aristotle"
+  },
+  {
+    "text": "Your time is limited, so don’t waste it living someone else’s life.",
+    "author": "Steve Jobs"
+  },
+  {
+    "text": "If you want to lift yourself up, lift up someone else.",
+    "author": "Booker T. Washington"
+  },
+  {
+    "text": "Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment.",
+    "author": "Buddha"
+  },
+  {
+    "text": "It always seems impossible until it’s done.",
+    "author": "Nelson Mandela"
+  },
+  {
+    "text": "Do what is right, not what is easy nor what is popular.",
+    "author": "Roy T. Bennett"
+  },
+  {
+    "text": "Perfection is not attainable, but if we chase perfection we can catch excellence.",
+    "author": "Vince Lombardi"
+  },
+  {
+    "text": "Difficulties in life are intended to make us better, not bitter.",
+    "author": "Dan Reeves"
+  },
+  {
+    "text": "Courage is resistance to fear, mastery of fear—not absence of fear.",
+    "author": "Mark Twain"
+  },
+  {
+    "text": "Opportunities don't happen, you create them.",
+    "author": "Chris Grosser"
+  },
+  {
+    "text": "Don't watch the clock; do what it does. Keep going.",
+    "author": "Sam Levenson"
+  },
+  {
+    "text": "A year from now you may wish you had started today.",
+    "author": "Karen Lamb"
+  },
+  {
     "text": "The future belongs to those who believe in the beauty of their dreams.",
     "author": "Eleanor Roosevelt"
+  },
+  {
+    "text": "If you can dream it, you can do it.",
+    "author": "Walt Disney"
+  },
+  {
+    "text": "Fall seven times and stand up eight.",
+    "author": "Japanese Proverb"
   },
   {
     "text": "It is never too late to be what you might have been.",
     "author": "George Eliot"
   },
   {
-    "text": "The only way to do great work is to love what you do.",
-    "author": "Steve Jobs"
+    "text": "Success usually comes to those who are too busy to be looking for it.",
+    "author": "Henry David Thoreau"
   },
   {
-    "text": "You miss 100% of the shots you don’t take.",
-    "author": "Wayne Gretzky"
+    "text": "You only live once, but if you do it right, once is enough.",
+    "author": "Mae West"
   },
   {
-    "text": "Success is not how high you have climbed, but how you make a positive difference to the world.",
+    "text": "Live as if you were to die tomorrow. Learn as if you were to live forever.",
+    "author": "Mahatma Gandhi"
+  },
+  {
+    "text": "A person who never made a mistake never tried anything new.",
+    "author": "Albert Einstein"
+  },
+  {
+    "text": "Don’t be pushed around by the fears in your mind. Be led by the dreams in your heart.",
     "author": "Roy T. Bennett"
   },
   {
-    "text": "Don’t watch the clock; do what it does. Keep going.",
-    "author": "Sam Levenson"
+    "text": "Happiness is not something ready made. It comes from your own actions.",
+    "author": "Dalai Lama"
+  },
+  {
+    "text": "Great minds discuss ideas; average minds discuss events; small minds discuss people.",
+    "author": "Eleanor Roosevelt"
+  },
+  {
+    "text": "Turn your wounds into wisdom.",
+    "author": "Oprah Winfrey"
+  },
+  {
+    "text": "Be yourself; everyone else is already taken.",
+    "author": "Oscar Wilde"
+  },
+  {
+    "text": "Don't count the days, make the days count.",
+    "author": "Muhammad Ali"
+  },
+  {
+    "text": "The mind is everything. What you think you become.",
+    "author": "Buddha"
+  },
+  {
+    "text": "Nothing is impossible. The word itself says 'I'm possible!'",
+    "author": "Audrey Hepburn"
+  },
+  {
+    "text": "Tough times never last, but tough people do.",
+    "author": "Robert H. Schuller"
+  },
+  {
+    "text": "Effort only fully releases its reward after a person refuses to quit.",
+    "author": "Napoleon Hill"
+  },
+  {
+    "text": "If you want to live a happy life, tie it to a goal, not to people or things.",
+    "author": "Albert Einstein"
+  },
+  {
+    "text": "You are never too old to set another goal or to dream a new dream.",
+    "author": "C.S. Lewis"
+  },
+  {
+    "text": "Doubt kills more dreams than failure ever will.",
+    "author": "Suzy Kassem"
+  },
+  {
+    "text": "The best way out is always through.",
+    "author": "Robert Frost"
+  },
+  {
+    "text": "Act the way you'd like to be and soon you'll be the way you act.",
+    "author": "Leonard Cohen"
+  },
+  {
+    "text": "Never let the fear of striking out keep you from playing the game.",
+    "author": "Babe Ruth"
+  },
+  {
+    "text": "A journey of a thousand miles begins with a single step.",
+    "author": "Lao Tzu"
+  },
+  {
+    "text": "What we achieve inwardly will change outer reality.",
+    "author": "Plutarch"
   }
 ]
