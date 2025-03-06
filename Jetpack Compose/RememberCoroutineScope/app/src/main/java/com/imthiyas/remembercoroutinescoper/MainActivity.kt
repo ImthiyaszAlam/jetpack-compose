@@ -12,10 +12,12 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
@@ -31,9 +33,36 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LaunchEffectComposable()
+            // LaunchEffectComposable()
+            App()
         }
     }
+}
+
+
+@Composable
+fun App() {
+    val counter = remember {
+        mutableStateOf(0)
+    }
+
+    LaunchedEffect(key1 = Unit) {
+        delay(2000)
+        counter.value = 10
+    }
+    Counter(counter.value)
+
+}
+
+
+@Composable
+fun Counter(value: Int) {
+    val state = rememberUpdatedState(newValue = value)
+    LaunchedEffect(key1 = Unit) {
+        delay(5000)
+        Log.d("Alam", state.value.toString())
+    }
+    Text(text = value.toString())
 }
 
 @Composable
