@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class TweetViewModel @Inject constructor(private val repository: TweetRepository) : ViewModel() {
+class TweetViewModel @Inject constructor( val repository: TweetRepository) : ViewModel() {
     val tweet: StateFlow<List<Tweet>>
         get() = repository.tweets
 

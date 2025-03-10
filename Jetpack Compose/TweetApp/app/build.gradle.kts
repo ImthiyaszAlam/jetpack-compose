@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.imthiyas.tweetsapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.imthiyas.tweetsapp"
@@ -41,7 +41,6 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.14"
-        kotlinCompilerVersion = "1.9.0"
     }
 }
 
@@ -58,7 +57,7 @@ dependencies {
 
 
     // Jetpack Compose core libraries
-    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation("androidx.activity:activity-compose:1.10.1")
     implementation("androidx.compose.ui:ui:1.7.8")
     implementation("androidx.compose.material3:material3:1.3.1")
     implementation("androidx.compose.ui:ui-tooling-preview:1.7.8")
@@ -66,27 +65,19 @@ dependencies {
 
     // Compose Icons
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
-
-
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.8")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.8")
 
 // If using Navigation with Jetpack Compose
-    implementation("androidx.navigation:navigation-compose:2.7.5")
-
+    implementation("androidx.navigation:navigation-compose:2.8.8")
 
     // Hilt Core
-    implementation("com.google.dagger:hilt-android:2.50")
+    implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-compiler:2.50")
 
 
-
     // Retrofit Core
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-
-    // Converter for JSON (Gson)
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
-    // (Optional) Moshi Converter instead of Gson
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 }
