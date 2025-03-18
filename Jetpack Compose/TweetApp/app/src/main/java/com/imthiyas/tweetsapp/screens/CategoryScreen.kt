@@ -26,7 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.imthiyas.tweetsapp.viewmodel.CategoryViewModel
 
 @Composable
-fun CategoryScreen() {
+fun CategoryScreen(email: String?) {
 
     val categoryViewModel: CategoryViewModel = viewModel()
     val categories: State<List<String>> = categoryViewModel.categories.collectAsState()

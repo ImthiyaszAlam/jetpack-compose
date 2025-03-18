@@ -3,13 +3,16 @@ package com.imthiyas.tweetsapp.ui
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.clickable
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.imthiyas.tweetsapp.network.TweetsApi
 import com.imthiyas.tweetsapp.screens.CategoryScreen
 import javax.inject.Inject
@@ -38,22 +41,32 @@ fun App() {
         startDestination = "registration"
     ) {
         composable(route = "registration") {
-            RegistrationScreen()
+            RegistrationScreen {
+                navController.navigate("main/${it}")
+            }
         }
 
         composable(route = "login") {
             LoginScreen()
         }
-        composable(route = "main") {
-            CategoryScreen()
+        composable(route = "main/{email}", arguments = listOf(
+            navArgument("email") {
+                type = NavType.StringType
+            }
+        )) {
+           val email =  it.arguments?.getString("email")
+            CategoryScreen(email)
         }
     }
 }
 
 @Composable
-fun RegistrationScreen() {
+fun RegistrationScreen(onClick: (email: String) -> Unit) {
     Text(
         text = "Registration",
+        modifier = Modifier.clickable {
+            onClick("alam@gmail.com")
+        },
         style = MaterialTheme.typography.bodyMedium
     )
 }
