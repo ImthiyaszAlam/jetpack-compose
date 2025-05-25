@@ -1,7 +1,5 @@
 
 
----
-
 # Jetpack Compose Learning 🚀
 
 Welcome to my **Jetpack Compose** learning repository! 🎉 This repository contains my daily progress, notes, and hands-on projects as I explore **Jetpack Compose**—the modern UI toolkit for Android.
