@@ -15,10 +15,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.imthiyas.newsapp.R
 import com.imthiyas.newsapp.presentation.Dimens.mediumPadding1
 import com.imthiyas.newsapp.presentation.onboarding.Page
+import com.imthiyas.newsapp.presentation.onboarding.pages
 
 
 @Composable
@@ -43,7 +45,7 @@ fun OnboardingPage(
                 text = it,
                 modifier = Modifier.padding(horizontal = mediumPadding1),
                 style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
-                color = colorResource(id = R.color.black)
+                color = colorResource(id = R.color.white)
             )
         }
 
@@ -57,4 +59,10 @@ fun OnboardingPage(
 
         }
     }
+}
+
+@Preview
+@Composable
+fun OnboardingPagePreview() {
+    OnboardingPage(page = pages[0])
 }
