@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
+
 fun OnboardingScreen(
 ) {
     Column(
@@ -31,5 +32,7 @@ fun OnboardingScreen(
                 }
             }
         }
+
+
     }
 }
