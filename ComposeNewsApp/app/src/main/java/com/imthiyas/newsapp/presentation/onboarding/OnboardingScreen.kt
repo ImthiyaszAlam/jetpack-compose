@@ -49,6 +49,7 @@ fun OnboardingScreen(
                     0 -> listOf("", "Next")
                     1 -> listOf("Back", "Next")
                     2 -> listOf("Back", "Get Started")
+                    3 -> listOf("", "Welcome")
                     else -> listOf("", "")
                 }
             }
@@ -77,29 +78,29 @@ fun OnboardingScreen(
 
 
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
 
-            val scope = rememberCoroutineScope()
+                val scope = rememberCoroutineScope()
 
-            if (buttonState.value[0].isNotEmpty()) {
-                NewsTextButton(text = buttonState.value[0], onClick = {
+                if (buttonState.value[0].isNotEmpty()) {
+                    NewsTextButton(text = buttonState.value[0], onClick = {
+                        scope.launch {
+                            pagerState.animateScrollToPage(page = pagerState.currentPage - 1)
+                        }
+
+                    })
+                }
+
+                NewsButton(text = buttonState.value[1], onClick = {
                     scope.launch {
-                        pagerState.animateScrollToPage(page = pagerState.currentPage - 1)
+                        if (pagerState.currentPage == 3) {
+                            //TODO: Navigate to Home Screen
+                        } else {
+                            pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
+                        }
                     }
-
                 })
             }
-
-            NewsButton(text = buttonState.value[1], onClick = {
-                scope.launch {
-                    if (pagerState.currentPage == 3) {
-                        //TODO: Navigate to Home Screen
-                    } else {
-                        pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
-                    }
-                }
-            })
-        }
         }
 
 
@@ -129,5 +130,14 @@ private fun PreviewOnboardingScreen1() {
 @Composable
 private fun PreviewOnboardingScreen2() {
     val pagerState = rememberPagerState(initialPage = 2) { pages.size }
+    OnboardingScreen(pagerState)
+}
+
+
+@OptIn(ExperimentalFoundationApi::class)
+@Preview
+@Composable
+private fun PreviewOnboardingScreen3() {
+    val pagerState = rememberPagerState(initialPage = 3) { pages.size }
     OnboardingScreen(pagerState)
 }

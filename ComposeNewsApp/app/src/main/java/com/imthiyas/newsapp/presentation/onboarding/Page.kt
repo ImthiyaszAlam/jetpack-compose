@@ -25,6 +25,12 @@ val pages = listOf(
         title = "City Park to Undergo Renovation",
         description = "Officials approve a plan to revamp the central park with new features.",
         image = R.drawable.image3
+    ),
+    Page(
+        title = "Welcome",
+        description = "Officials approve a plan to revamp the central park with new features.",
+        image = R.drawable.image4
+
     )
 
 
