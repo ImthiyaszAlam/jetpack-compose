@@ -63,5 +63,7 @@ fun OnboardingPage(
 @Preview
 @Composable
 fun OnboardingPagePreview() {
-    OnboardingPage(page = pages[2])
+    Column {
+        OnboardingPage(page = pages[0])
+    }
 }
