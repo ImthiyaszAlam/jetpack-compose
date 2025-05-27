@@ -56,7 +56,6 @@ fun OnboardingPage(
                 style = MaterialTheme.typography.bodyMedium,
                 color = colorResource(id = R.color.white)
             )
-
         }
     }
 }
@@ -64,5 +63,5 @@ fun OnboardingPage(
 @Preview
 @Composable
 fun OnboardingPagePreview() {
-    OnboardingPage(page = pages[0])
+    OnboardingPage(page = pages[2])
 }

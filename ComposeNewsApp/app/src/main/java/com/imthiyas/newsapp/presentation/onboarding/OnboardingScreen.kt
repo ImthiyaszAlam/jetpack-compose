@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.imthiyas.newsapp.presentation.Dimens.PageIndicatorWidth
 import com.imthiyas.newsapp.presentation.Dimens.mediumPadding2
@@ -38,9 +39,7 @@ fun OnboardingScreen(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        val pagerSate = rememberPagerState(initialPage = 0) {
-            pages.size
-        }
+        val pagerSate = rememberPagerState(initialPage = 0) { pages.size }
 
         val buttonState = remember {
             derivedStateOf {
@@ -80,7 +79,6 @@ fun OnboardingScreen(
 
             val scope = rememberCoroutineScope()
 
-
             if (buttonState.value[0].isNotEmpty()) {
                 NewsTextButton(text = buttonState.value[0], onClick = {
                     scope.launch {
@@ -103,4 +101,10 @@ fun OnboardingScreen(
 
 
     }
+}
+
+@Preview
+@Composable
+private fun PreviewOnboardingScreen() {
+    OnboardingScreen()
 }
