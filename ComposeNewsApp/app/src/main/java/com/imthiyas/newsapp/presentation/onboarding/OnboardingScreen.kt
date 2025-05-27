@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.imthiyas.newsapp.presentation.Dimens.PageIndicatorWidth
 import com.imthiyas.newsapp.presentation.Dimens.mediumPadding2
+import com.imthiyas.newsapp.presentation.common.NewsButton
 import com.imthiyas.newsapp.presentation.common.NewsTextButton
 import com.imthiyas.newsapp.presentation.onboarding.components.OnboardingPage
 import com.imthiyas.newsapp.presentation.onboarding.components.PageIndicator
@@ -35,15 +36,16 @@ import kotlinx.coroutines.launch
 @Composable
 
 fun OnboardingScreen(
+    pagerState: PagerState = rememberPagerState(initialPage = 0) { pages.size }
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        val pagerSate = rememberPagerState(initialPage = 0) { pages.size }
+        // val pagerState = rememberPagerState(initialPage = 0) { pages.size }
 
         val buttonState = remember {
             derivedStateOf {
-                when (pagerSate.currentPage) {
+                when (pagerState.currentPage) {
                     0 -> listOf("", "Next")
                     1 -> listOf("Back", "Next")
                     2 -> listOf("Back", "Get Started")
@@ -53,7 +55,7 @@ fun OnboardingScreen(
         }
 
 
-        HorizontalPager(state = pagerSate) { index ->
+        HorizontalPager(state = pagerState) { index ->
             OnboardingPage(page = pages[index])
         }
 
@@ -70,9 +72,9 @@ fun OnboardingScreen(
             PageIndicator(
                 modifier = Modifier.width(PageIndicatorWidth),
                 pageSize = pages.size,
-                selectedPage = pagerSate.currentPage
+                selectedPage = pagerState.currentPage
             )
-        }
+
 
 
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -82,29 +84,50 @@ fun OnboardingScreen(
             if (buttonState.value[0].isNotEmpty()) {
                 NewsTextButton(text = buttonState.value[0], onClick = {
                     scope.launch {
-                        pagerSate.animateScrollToPage(page = pagerSate.currentPage - 1)
+                        pagerState.animateScrollToPage(page = pagerState.currentPage - 1)
                     }
 
                 })
             }
 
-            NewsTextButton(text = buttonState.value[1], onClick = {
+            NewsButton(text = buttonState.value[1], onClick = {
                 scope.launch {
-                    if (pagerSate.currentPage == 3) {
+                    if (pagerState.currentPage == 3) {
                         //TODO: Navigate to Home Screen
                     } else {
-                        pagerSate.animateScrollToPage(page = pagerSate.currentPage + 1)
+                        pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
                     }
                 }
             })
+        }
         }
 
 
     }
 }
 
+
+@OptIn(ExperimentalFoundationApi::class)
 @Preview
 @Composable
-private fun PreviewOnboardingScreen() {
-    OnboardingScreen()
+private fun PreviewOnboardingScreen0() {
+    val pagerState = rememberPagerState(initialPage = 0) { pages.size }
+    OnboardingScreen(pagerState)
+}
+
+
+@OptIn(ExperimentalFoundationApi::class)
+@Preview
+@Composable
+private fun PreviewOnboardingScreen1() {
+    val pagerState = rememberPagerState(initialPage = 1) { pages.size }
+    OnboardingScreen(pagerState)
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Preview
+@Composable
+private fun PreviewOnboardingScreen2() {
+    val pagerState = rememberPagerState(initialPage = 2) { pages.size }
+    OnboardingScreen(pagerState)
 }
