@@ -8,23 +8,20 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OnBoardingViewModel @Inject constructor(private val appEntryUseCases: AppEntryUseCases) : ViewModel() {
+ class OnBoardingViewModel @Inject constructor(private val appEntryUseCases: AppEntryUseCases) :
+    ViewModel() {
 
 
     fun onEvent(event: OnBoardingEvent) {
         when (event) {
-            is OnBoardingEvent.saveAppEntry -> {
+             OnBoardingEvent.saveAppEntry -> {
                 saveAppEntry()
-            }
-
-            else -> {
-
             }
         }
     }
 
 
-    private fun saveAppEntry(){
+    private fun saveAppEntry() {
         viewModelScope.launch {
             appEntryUseCases.saveAppEntry()
         }

@@ -36,6 +36,7 @@ import kotlinx.coroutines.launch
 @Composable
 
 fun OnboardingScreen(
+    event: (OnBoardingEvent)-> Unit,
     pagerState: PagerState = rememberPagerState(initialPage = 0) { pages.size }
 ) {
     Column(
@@ -94,7 +95,7 @@ fun OnboardingScreen(
                 NewsButton(text = buttonState.value[1], onClick = {
                     scope.launch {
                         if (pagerState.currentPage == 3) {
-                            //TODO: Navigate to Home Screen
+                            event(OnBoardingEvent.saveAppEntry)
                         } else {
                             pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
                         }
