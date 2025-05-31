@@ -32,8 +32,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var appEntryUseCases: AppEntryUseCases
 
     @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,16 +40,10 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
 
 
-        lifecycleScope.launch {
-            appEntryUseCases.readAppEntry().collect {
-                Log.d("Test", it.toString())
-            }
-        }
         setContent {
             Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background))
             {
-                val viewModel: OnBoardingViewModel= hiltViewModel()
-                OnboardingScreen(event = viewModel::onEvent)
+
             }
         }
     }
