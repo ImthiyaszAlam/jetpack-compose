@@ -17,6 +17,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.lifecycleScope
 import com.imthiyas.newsapp.domain.usecases.AppEntryUseCases
 import com.imthiyas.newsapp.presentation.onboarding.OnBoardingViewModel
@@ -47,10 +48,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
         setContent {
-            Box(
-                modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
-            ) {
-                val viewModel: OnBoardingViewModel= HiltViewModel
+            Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background))
+            {
+                val viewModel: OnBoardingViewModel= hiltViewModel()
+                OnboardingScreen(event = viewModel::onEvent)
             }
         }
     }

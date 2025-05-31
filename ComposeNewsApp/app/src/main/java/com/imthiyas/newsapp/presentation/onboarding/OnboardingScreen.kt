@@ -1,6 +1,5 @@
 package com.imthiyas.newsapp.presentation.onboarding
 
-import android.widget.Space
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,14 +20,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.imthiyas.newsapp.presentation.Dimens.PageIndicatorWidth
 import com.imthiyas.newsapp.presentation.Dimens.mediumPadding2
 import com.imthiyas.newsapp.presentation.common.NewsButton
 import com.imthiyas.newsapp.presentation.common.NewsTextButton
 import com.imthiyas.newsapp.presentation.onboarding.components.OnboardingPage
 import com.imthiyas.newsapp.presentation.onboarding.components.PageIndicator
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 
@@ -115,7 +112,7 @@ fun OnboardingScreen(
 @Composable
 private fun PreviewOnboardingScreen0() {
     val pagerState = rememberPagerState(initialPage = 0) { pages.size }
-    OnboardingScreen(pagerState)
+   // OnboardingScreen(pagerState)
 }
 
 
@@ -124,7 +121,7 @@ private fun PreviewOnboardingScreen0() {
 @Composable
 private fun PreviewOnboardingScreen1() {
     val pagerState = rememberPagerState(initialPage = 1) { pages.size }
-    OnboardingScreen(pagerState)
+  //  OnboardingScreen(pagerState)
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -132,7 +129,7 @@ private fun PreviewOnboardingScreen1() {
 @Composable
 private fun PreviewOnboardingScreen2() {
     val pagerState = rememberPagerState(initialPage = 2) { pages.size }
-    OnboardingScreen(pagerState)
+   // OnboardingScreen(pagerState)
 }
 
 
@@ -141,5 +138,5 @@ private fun PreviewOnboardingScreen2() {
 @Composable
 private fun PreviewOnboardingScreen3() {
     val pagerState = rememberPagerState(initialPage = 3) { pages.size }
-    OnboardingScreen(pagerState)
+   // OnboardingScreen(pagerState)
 }
