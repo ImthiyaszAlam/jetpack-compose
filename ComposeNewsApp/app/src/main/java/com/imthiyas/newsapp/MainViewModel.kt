@@ -3,9 +3,13 @@ package com.imthiyas.newsapp
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import com.imthiyas.newsapp.domain.usecases.AppEntryUseCases
+import com.imthiyas.newsapp.presentation.navgraph.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.lang.reflect.Constructor
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
@@ -14,5 +18,18 @@ class MainViewModel @Inject constructor(private val appEntryUseCases: AppEntryUs
 
     private val _splashCondition = mutableStateOf(true)
     val splashCondition: State<Boolean> = _splashCondition
+
+    var startDestination by mutableStateOf(Route.AppStartNavigation.route)
+    init {
+        appEntryUseCases.readAppEntry().onEach {shouldStartFromHomeScreen->
+            if (shouldStartFromHomeScreen){
+                startDestination = Route.NewsNavigation.route
+            }else{
+                startDestination = Route.AppStartNavigation.route
+            }
+            delay(300)
+            splashCondition = false
+        }
+    }
 
 }
