@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         installSplashScreen().apply {
             setKeepOnScreenCondition {
-                viewModel.splashCondition
+                viewModel.splashCondition.value
             }
         }
 

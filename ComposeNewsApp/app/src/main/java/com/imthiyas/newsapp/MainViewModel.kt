@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,19 +20,23 @@ class MainViewModel @Inject constructor(private val appEntryUseCases: AppEntryUs
     ViewModel() {
 
     private val _splashCondition = mutableStateOf(true)
-    val splashCondition: State<Boolean> = _splashCondition
+    var splashCondition: State<Boolean> = _splashCondition
 
     var startDestination by mutableStateOf(Route.AppStartNavigation.route)
+
     init {
-        appEntryUseCases.readAppEntry().onEach {shouldStartFromHomeScreen->
-            if (shouldStartFromHomeScreen){
-                startDestination = Route.NewsNavigation.route
-            }else{
-                startDestination = Route.AppStartNavigation.route
+        viewModelScope.launch {
+            appEntryUseCases.readAppEntry().onEach { shouldStartFromHomeScreen ->
+                if (shouldStartFromHomeScreen) {
+                    startDestination = Route.NewsNavigation.route
+                } else {
+                    startDestination = Route.AppStartNavigation.route
+                }
+                delay(300)
+                _splashCondition.value = false
             }
-            delay(300)
-            splashCondition = false
-        }.launchIn(viewModelScope)
+        }
+
     }
 
 }
