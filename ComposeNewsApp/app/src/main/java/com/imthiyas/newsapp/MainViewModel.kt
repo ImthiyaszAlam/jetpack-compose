@@ -5,10 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewModelScope
 import com.imthiyas.newsapp.domain.usecases.AppEntryUseCases
 import com.imthiyas.newsapp.presentation.navgraph.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
@@ -29,7 +31,7 @@ class MainViewModel @Inject constructor(private val appEntryUseCases: AppEntryUs
             }
             delay(300)
             splashCondition = false
-        }
+        }.launchIn(viewModelScope)
     }
 
 }
