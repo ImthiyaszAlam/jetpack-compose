@@ -47,7 +47,7 @@ fun OnboardingScreen(
                     0 -> listOf("", "Next")
                     1 -> listOf("Back", "Next")
                     2 -> listOf("Back", "Get Started")
-                    3 -> listOf("", "Welcome")
+                    3 -> listOf("Back", "Welcome")
                     else -> listOf("", "")
                 }
             }

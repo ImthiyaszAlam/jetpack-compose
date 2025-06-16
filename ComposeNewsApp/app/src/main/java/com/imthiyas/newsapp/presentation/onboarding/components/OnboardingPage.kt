@@ -45,7 +45,7 @@ fun OnboardingPage(
                 text = it,
                 modifier = Modifier.padding(horizontal = mediumPadding1),
                 style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
-                color = colorResource(id = R.color.white)
+                color = colorResource(id = R.color.black)
             )
         }
 
@@ -54,7 +54,7 @@ fun OnboardingPage(
                 text = it,
                 modifier = Modifier.padding(horizontal = mediumPadding1),
                 style = MaterialTheme.typography.bodyMedium,
-                color = colorResource(id = R.color.white)
+                color = colorResource(id = R.color.black)
             )
         }
     }
