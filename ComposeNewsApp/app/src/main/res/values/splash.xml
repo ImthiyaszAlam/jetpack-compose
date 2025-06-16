@@ -5,6 +5,5 @@
         <item name="windowSplashScreenBackground">#fff</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/baseline_add_24</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.NewsApp</item>
-        
     </style>
 </resources>

@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 
     fun onEvent(event: OnBoardingEvent) {
+
         when (event) {
              OnBoardingEvent.saveAppEntry -> {
                 saveAppEntry()

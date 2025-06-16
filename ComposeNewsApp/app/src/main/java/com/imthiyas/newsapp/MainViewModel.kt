@@ -1,5 +1,6 @@
 package com.imthiyas.newsapp
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import com.imthiyas.newsapp.domain.usecases.AppEntryUseCases
 import com.imthiyas.newsapp.presentation.navgraph.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -26,6 +28,7 @@ class MainViewModel @Inject constructor(private val appEntryUseCases: AppEntryUs
 
     init {
         viewModelScope.launch {
+
             appEntryUseCases.readAppEntry().onEach { shouldStartFromHomeScreen ->
                 if (shouldStartFromHomeScreen) {
                     startDestination = Route.NewsNavigation.route
@@ -34,7 +37,9 @@ class MainViewModel @Inject constructor(private val appEntryUseCases: AppEntryUs
                 }
                 delay(300)
                 _splashCondition.value = false
-            }
+            }.launchIn(viewModelScope)
+
+
         }
 
     }

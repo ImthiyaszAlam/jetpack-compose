@@ -1,5 +1,5 @@
 package com.imthiyas.newsapp.presentation.onboarding
 
 sealed class OnBoardingEvent {
-    object saveAppEntry : OnBoardingEvent
+    object saveAppEntry : OnBoardingEvent()
 }

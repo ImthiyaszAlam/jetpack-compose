@@ -28,6 +28,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.imthiyas.newsapp.domain.usecases.AppEntryUseCases
 import com.imthiyas.newsapp.presentation.navgraph.NavGraph
+import com.imthiyas.newsapp.presentation.onboarding.OnBoardingEvent
 import com.imthiyas.newsapp.presentation.onboarding.OnBoardingViewModel
 import com.imthiyas.newsapp.presentation.onboarding.OnboardingScreen
 import com.imthiyas.newsapp.presentation.onboarding.components.OnboardingPage
