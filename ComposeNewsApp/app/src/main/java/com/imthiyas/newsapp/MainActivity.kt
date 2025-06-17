@@ -13,6 +13,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -51,6 +52,9 @@ class MainActivity : AppCompatActivity() {
             setKeepOnScreenCondition {
                 viewModel.splashCondition.value
             }
+
+            val value = viewModel.splashCondition.value
+            Log.d("setKeepOnScreenCondition", "$value")
         }
 
 
@@ -69,6 +73,7 @@ class MainActivity : AppCompatActivity() {
             {
                 val startDestination = viewModel.startDestination
                 NavGraph(startDestination = startDestination)
+                Log.d("startDestination", startDestination)
             }
         }
     }

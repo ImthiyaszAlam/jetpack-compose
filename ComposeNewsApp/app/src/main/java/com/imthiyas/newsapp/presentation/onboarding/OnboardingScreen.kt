@@ -1,5 +1,6 @@
 package com.imthiyas.newsapp.presentation.onboarding
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -33,7 +34,7 @@ import kotlinx.coroutines.launch
 @Composable
 
 fun OnboardingScreen(
-    event: (OnBoardingEvent)-> Unit,
+    event: (OnBoardingEvent) -> Unit,
     pagerState: PagerState = rememberPagerState(initialPage = 0) { pages.size }
 ) {
     Column(
@@ -47,7 +48,6 @@ fun OnboardingScreen(
                     0 -> listOf("", "Next")
                     1 -> listOf("Back", "Next")
                     2 -> listOf("Back", "Get Started")
-                    3 -> listOf("Back", "Welcome")
                     else -> listOf("", "")
                 }
             }
@@ -89,9 +89,17 @@ fun OnboardingScreen(
                     })
                 }
 
+                val btnVal0 = buttonState.value[0]
+                val btnVal1 = buttonState.value[1]
+                Log.d("btnVal", btnVal0)
+                Log.d("btnVal", btnVal1)
+
                 NewsButton(text = buttonState.value[1], onClick = {
                     scope.launch {
-                        if (pagerState.currentPage == 3) {
+
+                        val cPage = pagerState.currentPage
+                        Log.d("btnVal", "$cPage")
+                        if (pagerState.currentPage == 2) {
                             event(OnBoardingEvent.saveAppEntry)
                         } else {
                             pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
@@ -112,7 +120,7 @@ fun OnboardingScreen(
 @Composable
 private fun PreviewOnboardingScreen0() {
     val pagerState = rememberPagerState(initialPage = 0) { pages.size }
-   // OnboardingScreen(pagerState)
+    // OnboardingScreen(pagerState)
 }
 
 
@@ -121,7 +129,7 @@ private fun PreviewOnboardingScreen0() {
 @Composable
 private fun PreviewOnboardingScreen1() {
     val pagerState = rememberPagerState(initialPage = 1) { pages.size }
-  //  OnboardingScreen(pagerState)
+    //  OnboardingScreen(pagerState)
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -129,7 +137,7 @@ private fun PreviewOnboardingScreen1() {
 @Composable
 private fun PreviewOnboardingScreen2() {
     val pagerState = rememberPagerState(initialPage = 2) { pages.size }
-   // OnboardingScreen(pagerState)
+    // OnboardingScreen(pagerState)
 }
 
 
@@ -138,5 +146,5 @@ private fun PreviewOnboardingScreen2() {
 @Composable
 private fun PreviewOnboardingScreen3() {
     val pagerState = rememberPagerState(initialPage = 3) { pages.size }
-   // OnboardingScreen(pagerState)
+    // OnboardingScreen(pagerState)
 }
