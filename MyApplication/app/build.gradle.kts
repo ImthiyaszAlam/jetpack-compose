@@ -9,11 +9,11 @@ android {
     buildFeatures {
         compose=true
     }
-    namespace = "com.mehrban.myapplication"
+    namespace = "com.alam.myapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.mehrban.myapplication"
+        applicationId = "com.alam.myapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
