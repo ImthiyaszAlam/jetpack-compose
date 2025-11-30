@@ -1,10 +1,10 @@
 
 
-# Jetpack Compose Learning 🚀
+# Jetpack Compose Learning 
 
 Welcome to my **Jetpack Compose** learning repository! 🎉 This repository contains my daily progress, notes, and hands-on projects as I explore **Jetpack Compose**—the modern UI toolkit for Android.
 
-## 📌 About  
+##  About  
 Jetpack Compose simplifies UI development for Android by using a declarative approach. This repository serves as my personal learning journal, where I document concepts, code snippets, and small projects to enhance my understanding of Compose.
 
 
@@ -21,9 +21,9 @@ Jetpack Compose simplifies UI development for Android by using a declarative app
 ✔️ Theming and Material Design 3  
 ✔️ Performance optimization  
 
-…and more as I progress! 🚀  
+…and more as I progress! 
 
-## 🎯 Goal  
+##  Goal  
 By maintaining this repository, I aim to:  
 ✅ Build a strong foundation in Jetpack Compose  
 ✅ Create reusable UI components  
@@ -32,7 +32,7 @@ By maintaining this repository, I aim to:
 
 ### ⭐ If you find this useful, consider giving the repo a **star**!  
 
-Happy Coding! 🚀🔥  
+Happy Coding! 
 
 ---
 # Currently Working on News App Project 
