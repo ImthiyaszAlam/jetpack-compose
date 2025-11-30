@@ -21,4 +21,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "CraveCart"
 include(":app")
- 
+include(":core-ui")
+include(":core-network")
+include(":core-database")
+include(":core-model")
+include(":feature-restaurantlist")
