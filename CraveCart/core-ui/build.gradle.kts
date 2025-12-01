@@ -7,6 +7,17 @@ android {
     namespace = "com.imthiyas.core_ui"
     compileSdk = 34
 
+
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.5"
+    }
+
+
     defaultConfig {
         minSdk = 24
 
