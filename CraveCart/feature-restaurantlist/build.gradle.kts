@@ -40,4 +40,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(project(":core-ui"))
+    implementation(project(":core-model"))
+    implementation(project(":core-network"))
+    implementation(project(":core-database"))
+
+    implementation("androidx.paging:paging-compose:3.3.0")
 }
