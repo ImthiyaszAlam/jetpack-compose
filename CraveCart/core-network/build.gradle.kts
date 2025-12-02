@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.imthiyas.core_network"
-    compileSdk = 34
+    compileSdk = 35
 
 
     buildFeatures {

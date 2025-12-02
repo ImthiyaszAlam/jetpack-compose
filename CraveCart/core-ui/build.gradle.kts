@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.imthiyas.core_ui"
-    compileSdk = 34
+    compileSdk = 35
 
 
 

@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.imthiyas.core_database"
-    compileSdk = 34
+    compileSdk = 35
 
 
 
