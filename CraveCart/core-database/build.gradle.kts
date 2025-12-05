@@ -59,14 +59,14 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
 
-    implementation(platform("androidx.compose:compose-bom:2024.10.01"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation(libs.androidx.compose.bom)
+    implementation(libs.androidx.compose.ui.ui4)
+    implementation(libs.androidx.compose.material3.material34)
+    implementation(libs.androidx.compose.ui.ui.tooling.preview4)
 
 
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt("androidx.room:room-compiler:2.8.4")
 
 }

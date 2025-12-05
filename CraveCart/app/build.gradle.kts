@@ -55,10 +55,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(platform("androidx.compose:compose-bom:2025.11.01"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation(libs.androidx.compose.bom.v20251101)
+    implementation(libs.androidx.compose.ui.ui3)
+    implementation(libs.androidx.compose.material3.material33)
+    implementation(libs.androidx.compose.ui.ui.tooling.preview3)
 
 
 }
