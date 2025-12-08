@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.imthiyas.core_database"
-    compileSdk = 35
+    compileSdk = 36
 
 
 
@@ -58,8 +58,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-
-    implementation(libs.androidx.compose.bom)
     implementation(libs.androidx.compose.ui.ui4)
     implementation(libs.androidx.compose.material3.material34)
     implementation(libs.androidx.compose.ui.ui.tooling.preview4)

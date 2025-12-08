@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.imthiyas.core_network"
-    compileSdk = 35
+    compileSdk = 36
 
 
     buildFeatures {
@@ -55,7 +55,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.androidx.compose.bom)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling.preview)

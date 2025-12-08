@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.imthiyas.cravecart"
-    compileSdk = 35
+    compileSdk = 36
 
     buildFeatures {
         compose = true
@@ -55,10 +55,11 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.androidx.compose.bom.v20251101)
     implementation(libs.androidx.compose.ui.ui3)
     implementation(libs.androidx.compose.material3.material33)
     implementation(libs.androidx.compose.ui.ui.tooling.preview3)
 
-
+    configurations.all {
+        exclude(group = "androidx.navigationevent", module = "navigationevent-android")
+    }
 }

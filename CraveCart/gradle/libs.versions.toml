@@ -1,8 +1,8 @@
 [versions]
 agp = "8.7.3"
-androidxComposeBom = "2025.11.01"
+androidxComposeBom = "2025.12.00"
 composeBom = "2025.12.00"
-composeBomVersion = "2024.10.01"
+composeBomVersion = "2025.12.00"
 converterGson = "2.9.0"
 kotlin = "1.9.24"
 coreKtx = "1.17.0"
