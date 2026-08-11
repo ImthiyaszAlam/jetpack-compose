@@ -10,6 +10,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -17,71 +18,92 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.imthiyas.usermanagementapp.model.Product
 import com.imthiyas.usermanagementapp.ui.components.AppTopBar
 import com.imthiyas.usermanagementapp.ui.components.ProductCard
+import com.imthiyas.usermanagementapp.ui.state.ProductUiState
+import com.imthiyas.usermanagementapp.viewmodel.ProductViewModel
 
 @Composable
-fun ProductsScreen(onProductClick: (Int) -> Unit, onBackClick: () -> Unit) {
+fun ProductsScreen(
+    onProductClick: (Int) -> Unit,
+    onBackClick: () -> Unit,
+    viewModel: ProductViewModel= viewModel()
+) {
 
     Scaffold(topBar = { AppTopBar("Products", onBackClick = onBackClick) }) { innerPadding ->
 
 
-        val products = listOf(
-            Product(1, "iPhone", "₹99,999", true),
-            Product(2, "Samsung", "₹87,876", false),
-            Product(3, "Pixel", "₹69,999", true),
-            Product(4, "OnePlus", "₹49,999", false),
-            Product(5, "Nothing Phone", "₹39,999", true),
-            Product(6, "Xiaomi", "₹29,999", false)
-        )
+        val state by viewModel.state.collectAsState()
+        when (state) {
 
-
-        var searchText by remember {
-            mutableStateOf("")
-        }
-
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(start = 16.dp, end = 16.dp)
-                .padding(innerPadding)
-        ) {
-
-
-            OutlinedTextField(
-                value = searchText,
-                onValueChange = { searchText = it },
-                label = { Text("Search Products") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.Start)
-            )
-
-
-            val filterProducts = products.filter {
-                it.name.contains(
-                    searchText, ignoreCase = true
-                ) ||
-
-                        it.price.contains(searchText, ignoreCase = true)
+            is ProductUiState.Loading -> {
+                Text(text = "Loading")
             }
 
-            LazyColumn(modifier = Modifier.fillMaxWidth()) {
+            is ProductUiState.Success -> {
+             val products = (state as ProductUiState.Success).products
 
-                items(filterProducts) { product ->
-                    ProductCard(
-                        product = product,
-                        onClick = {
-                            onProductClick(product.id)
-                        }
-                    )
+
+                var searchText by remember {
+                    mutableStateOf("")
                 }
 
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(start = 16.dp, end = 16.dp)
+                        .padding(innerPadding)
+                ) {
+
+
+                    OutlinedTextField(
+                        value = searchText,
+                        onValueChange = { searchText = it },
+                        label = { Text("Search Products") },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.Start)
+                    )
+
+
+                    val filterProducts = products.filter {
+                        it.name.contains(
+                            searchText, ignoreCase = true
+                        ) ||
+
+                                it.price.contains(searchText, ignoreCase = true)
+                    }
+
+                    LazyColumn(modifier = Modifier.fillMaxWidth()) {
+
+                        items(filterProducts) { product ->
+                            ProductCard(
+                                product = product,
+                                onClick = {
+                                    onProductClick(product.id)
+                                }
+                            )
+                        }
+
+                    }
+
+                }
+
+
+
+            }
+
+            is ProductUiState.Error -> {
+                Text("Error: ${(state as ProductUiState.Error).message}")
             }
 
         }
+
+
+
 
 
     }

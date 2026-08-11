@@ -20,7 +20,10 @@ fun AppNavigation() {
         startDestination = "home"
     ) {
         composable("home") {
-            HomeScreen(onProductsClick = { navController.navigate("products") })
+            HomeScreen(
+                onProductsClick = { navController.navigate("products") },
+                onBackClick = { navController.popBackStack() }
+            )
         }
 
 
