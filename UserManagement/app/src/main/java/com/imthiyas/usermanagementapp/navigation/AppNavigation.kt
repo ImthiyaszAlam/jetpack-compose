@@ -39,7 +39,7 @@ fun AppNavigation() {
                 ?.getString("productId")
 
             ProductDetailsScreen(
-                productId = productId
+                productId = productId, onBackClick = { navController.popBackStack() }
             )
         }
 
