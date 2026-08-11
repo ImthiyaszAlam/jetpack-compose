@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UserManagementApp</string>
+    <string name="title_activity_products_screen">ProductsScreen</string>
 </resources>
