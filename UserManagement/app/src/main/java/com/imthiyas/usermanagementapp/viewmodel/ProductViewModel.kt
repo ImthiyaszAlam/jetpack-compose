@@ -15,6 +15,13 @@ class ProductViewModel : ViewModel() {
     private val _state = MutableStateFlow<ProductUiState>(ProductUiState.Loading)
     val state: StateFlow<ProductUiState> = _state
 
+    private var currentPage = 0
+
+    private val pageSize = 10
+
+    private var isLoadingMore = false
+
+
     init {
         loadProducts()
     }
@@ -24,19 +31,58 @@ class ProductViewModel : ViewModel() {
         viewModelScope.launch {
 
 
-            try {
-                val products = repository.getProducts()
-                _state.value = ProductUiState.Success(products)
 
-            } catch (e: Exception) {
-                _state.value = ProductUiState.Error(
-                    e.message ?: "Something went wrong"
-                )
-            }
+        try {
+            val products = repository.getProducts(limit = pageSize, skip = 0)
+            currentPage=1
+            _state.value = ProductUiState.Success(products)
+
+        } catch (e: Exception) {
+            _state.value = ProductUiState.Error(
+                e.message ?: "Something went wrong"
+            )
+        }
 
         }
 
 
     }
+
+    fun loadNextPage() {
+
+        if (isLoadingMore) return
+
+        isLoadingMore = true
+
+        viewModelScope.launch {
+
+            try {
+
+                val newProducts =
+                    repository.getProducts(
+                        limit = pageSize,
+                        skip = currentPage * pageSize
+                    )
+
+                val currentProducts =
+                    (_state.value as? ProductUiState.Success)
+                        ?.products
+                        ?: emptyList()
+
+                _state.value =
+                    ProductUiState.Success(
+                        currentProducts + newProducts
+                    )
+
+                currentPage++
+
+            } finally {
+
+                isLoadingMore = false
+            }
+        }
+    }
+
+
 
 }

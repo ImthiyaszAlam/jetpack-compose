@@ -9,8 +9,9 @@ class ProductRepository {
 
     private val api = RetrofitClient.api
 
-  suspend  fun getProducts(): List<Product> {
-      return api.getProducts().products.map { apiProduct ->
+  suspend  fun getProducts(  limit: Int,
+                             skip: Int): List<Product> {
+      return api.getProducts(limit,skip).products.map { apiProduct ->
 
           Product(
               id = apiProduct.id,
