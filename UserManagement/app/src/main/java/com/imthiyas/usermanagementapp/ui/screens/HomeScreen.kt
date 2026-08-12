@@ -22,6 +22,7 @@ import com.imthiyas.usermanagementapp.ui.components.AppTopBar
 fun HomeScreen(
     modifier: Modifier = Modifier,
     onProductsClick: () -> Unit,
+    onFormsClick: () -> Unit,
     onBackClick: () -> Unit
 ) {
 
@@ -52,7 +53,10 @@ fun HomeScreen(
 
                 Spacer(modifier = Modifier.width(8.dp))
 
-                Button(onClick = {}, modifier = Modifier.weight(1f)) { Text("Camera") }
+                Button(
+                    onClick = { onFormsClick() },
+                    modifier = Modifier.weight(1f)
+                ) { Text("Forms") }
 
 
             }
