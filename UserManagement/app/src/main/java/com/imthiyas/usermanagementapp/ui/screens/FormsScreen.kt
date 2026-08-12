@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -39,6 +40,13 @@ fun FormsScreen(onBackClick: () -> Unit) {
     }
 
 
+    var nameError by remember { mutableStateOf(false) }
+    var emailError by remember { mutableStateOf(false) }
+    var phoneError by remember { mutableStateOf(false) }
+
+
+
+
     Scaffold(topBar = { AppTopBar("Add User", onBackClick) }) { innerPadding ->
 
 
@@ -60,8 +68,15 @@ fun FormsScreen(onBackClick: () -> Unit) {
                 label = {
                     Text("Name")
                 },
+                isError = nameError,
+                supportingText = {
+                    if (nameError) {
+                        Text("Name is required", color = MaterialTheme.colorScheme.error)
+                    }
+                },
                 modifier = Modifier.fillMaxWidth()
             )
+
 
             Spacer(
                 modifier = Modifier.height(8.dp)
@@ -73,6 +88,11 @@ fun FormsScreen(onBackClick: () -> Unit) {
                 onValueChange = { email = it },
                 label = {
                     Text(text = "Email")
+                },
+                isError = emailError, supportingText = {
+                    if (nameError) {
+                        Text("Email is required", color = MaterialTheme.colorScheme.error)
+                    }
                 },
                 modifier = Modifier.fillMaxWidth()
             )
@@ -89,8 +109,16 @@ fun FormsScreen(onBackClick: () -> Unit) {
                 label = {
                     Text(text = "Phone")
                 },
+                isError = phoneError, supportingText = {
+                    if (nameError) {
+                        Text("Phone is required", color = MaterialTheme.colorScheme.error)
+                    }
+                },
                 modifier = Modifier.fillMaxWidth()
             )
+
+
+
 
 
             Spacer(
@@ -99,7 +127,27 @@ fun FormsScreen(onBackClick: () -> Unit) {
 
             Button(
                 onClick = {
-                    // validation later
+                    nameError = name.isBlank()
+
+                    emailError =
+                        !android.util.Patterns.EMAIL_ADDRESS
+                            .matcher(email)
+                            .matches()
+
+                    phoneError =
+                        phone.length != 10
+
+
+                    val isValid =
+                        !nameError &&
+                                !emailError &&
+                                !phoneError
+
+
+                    if (isValid) {
+
+                    }
+
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
