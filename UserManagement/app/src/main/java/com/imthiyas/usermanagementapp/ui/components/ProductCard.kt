@@ -2,10 +2,15 @@ package com.imthiyas.usermanagementapp.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -31,35 +36,48 @@ fun ProductCard(product: Product, onClick: () -> Unit) {
 
     Card(
         modifier = Modifier
-            .height(150.dp)
-            .padding(top = 16.dp)
-            .clickable{onClick()},
+            .padding(bottom = 16.dp)
+            .clickable { onClick() },
         shape = RoundedCornerShape(16.dp),
         border = BorderStroke(1.dp, Color.Gray),
         elevation = CardDefaults.cardElevation(defaultElevation = 16.dp)
     ) {
 
 
-        Box(
+        Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(16.dp)
         ) {
 
-            Text(text = product.name, modifier = Modifier.align(Alignment.TopCenter))
 
-            if (product.isFavourite) {
-                Text(
-                    text = if (isFavourite) "❤️" else "♡",
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .clickable {
-                            isFavourite = !isFavourite
-                        }
-                )
+            Row(modifier = Modifier.padding(horizontal = 16.dp)) {
+
+                Column(modifier = Modifier.fillMaxWidth(1f)) {
+
+                    Text(text = product.name)
+
+                    Text(text = product.price)
+                }
+
+
+                product.isFavourite = true
+                if (product.isFavourite) {
+                    Text(
+                        text = if (isFavourite) "❤️" else "♡",
+                        modifier = Modifier
+                            .fillMaxWidth(1f)
+                            .align(Alignment.CenterVertically)
+                            .clickable {
+                                isFavourite = !isFavourite
+                            }
+                            .padding(end = 16.dp),
+
+                    )
+                }
+
             }
 
-            Text(text = product.price, modifier = Modifier.align(Alignment.BottomStart))
 
         }
     }

@@ -21,4 +21,19 @@ class ProductRepository {
           )
       }
     }
+
+
+    suspend fun getProductDetails(id: Int): Product {
+
+        val product = api.getProductDetails(id)
+
+        return Product(
+            id = product.id,
+            name = product.title,
+            price = "₹${product.price}",
+            isFavourite = false
+        )
+    }
+
+
 }

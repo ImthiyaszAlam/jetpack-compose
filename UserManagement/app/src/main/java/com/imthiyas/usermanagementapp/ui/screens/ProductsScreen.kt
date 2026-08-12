@@ -12,6 +12,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -22,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -35,7 +37,7 @@ import com.imthiyas.usermanagementapp.viewmodel.ProductViewModel
 fun ProductsScreen(
     onProductClick: (Int) -> Unit,
     onBackClick: () -> Unit,
-    viewModel: ProductViewModel= viewModel()
+    viewModel: ProductViewModel = viewModel()
 ) {
 
     Scaffold(topBar = { AppTopBar("Products", onBackClick = onBackClick) }) { innerPadding ->
@@ -61,7 +63,6 @@ fun ProductsScreen(
         }
 
 
-
         val state by viewModel.state.collectAsStateWithLifecycle()
         when (state) {
 
@@ -75,7 +76,7 @@ fun ProductsScreen(
             }
 
             is ProductUiState.Success -> {
-             val products = (state as ProductUiState.Success).products
+                val products = (state as ProductUiState.Success).products
 
 
                 var searchText by remember {
@@ -97,7 +98,6 @@ fun ProductsScreen(
                         label = { Text("Search Products") },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .align(Alignment.Start)
                     )
 
 
@@ -109,21 +109,46 @@ fun ProductsScreen(
                                 it.price.contains(searchText, ignoreCase = true)
                     }
 
-                    LazyColumn( state = listState,modifier = Modifier.fillMaxWidth()) {
 
-                        items((state as ProductUiState.Success).products) { product ->
-                            ProductCard(
-                                product = product,
-                                onClick = {
-                                    onProductClick(product.id)
+                    PullToRefreshBox(
+                        isRefreshing = (state as ProductUiState.Success).isRefreshing,
+                        onRefresh = { viewModel.refreshProducts() }
+                    ) {
+
+
+                        LazyColumn(
+                            state = listState,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 16.dp)
+                        ) {
+
+                            items(filterProducts) { product ->
+                                ProductCard(
+                                    product = product,
+                                    onClick = {
+                                        onProductClick(product.id)
+                                    }
+                                )
+
+                            }
+
+                            if ((state as ProductUiState.Success).isLoadingMore) {
+                                item {
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(16.dp), contentAlignment = Alignment.Center
+                                    ) {
+                                        CircularProgressIndicator()
+                                    }
                                 }
-                            )
+                            }
                         }
-
                     }
 
-                }
 
+                }
 
 
             }
@@ -140,9 +165,6 @@ fun ProductsScreen(
             }
 
         }
-
-
-
 
 
     }
