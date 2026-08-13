@@ -23,6 +23,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     onProductsClick: () -> Unit,
     onFormsClick: () -> Unit,
+    onPlayClick: () -> Unit,
     onBackClick: () -> Unit
 ) {
 
@@ -59,6 +60,15 @@ fun HomeScreen(
                 ) { Text("Forms") }
 
 
+            }
+
+            Button(
+                onClick = { onPlayClick() },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                Text(text = "Play Ground")
             }
 
 

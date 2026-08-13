@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.imthiyas.usermanagementapp.ui.screens.ComposePlaygroundScreen
 import com.imthiyas.usermanagementapp.ui.screens.FormsScreen
 import com.imthiyas.usermanagementapp.ui.screens.HomeScreen
 import com.imthiyas.usermanagementapp.ui.screens.ProductDetailsScreen
@@ -20,12 +21,20 @@ fun AppNavigation() {
         navController = navController,
         startDestination = "home"
     ) {
+
+
         composable("home") {
             HomeScreen(
                 onProductsClick = { navController.navigate("products") },
                 onFormsClick = { navController.navigate("forms") },
+                onPlayClick = { navController.navigate("compose_playground_screen") },
                 onBackClick = { navController.popBackStack() }
             )
+        }
+
+
+        composable("compose_playground_screen") {
+            ComposePlaygroundScreen(onBackClick = { navController.popBackStack() })
         }
 
 
@@ -40,6 +49,7 @@ fun AppNavigation() {
         composable("forms") {
             FormsScreen(onBackClick = { navController.popBackStack() })
         }
+
 
         composable("product_details/{productId}") { backStackEntry ->
 
