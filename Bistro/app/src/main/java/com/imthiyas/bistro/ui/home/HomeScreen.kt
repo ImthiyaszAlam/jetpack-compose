@@ -28,6 +28,7 @@ import com.imthiyas.bistro.ui.navigation.BottomNavigationBar
 
 @Composable
 fun HomeScreen() {
+
     Scaffold(
         bottomBar = { BottomNavigationBar() }
     ) { paddingValues ->
