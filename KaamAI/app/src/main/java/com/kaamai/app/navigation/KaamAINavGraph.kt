@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.kaamai.app.ui.screens.HomeScreen
+import com.kaamai.app.ui.screens.NewVisitScreen
 import com.kaamai.app.ui.screens.ReportsScreen
 import com.kaamai.app.viewmodel.KaamAIViewModel
 import kotlinx.coroutines.launch
@@ -141,10 +142,30 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
                 modifier = Modifier.padding(innerPadding)
             ) {
                 composable(KaamAIScreen.Home.route) {
-                    HomeScreen(viewModel = viewModel)
+                    HomeScreen(
+                        viewModel = viewModel,
+                        onStartNewVisit = {
+                            navController.navigate(KaamAIScreen.NewVisit.route)
+                        }
+                    )
                 }
                 composable(KaamAIScreen.Reports.route) {
-                    ReportsScreen(viewModel = viewModel)
+                    ReportsScreen(
+                        onHomeClick = {
+                            navController.navigate(KaamAIScreen.Home.route) {
+                                popUpTo(KaamAIScreen.Home.route) { inclusive = true }
+                            }
+                        }
+                    )
+                }
+                composable(KaamAIScreen.NewVisit.route) {
+                    NewVisitScreen(
+                        onBackClick = { navController.popBackStack() },
+                        onSaveClick = { customer, notes ->
+                            viewModel.addReport(customer, notes)
+                            navController.popBackStack()
+                        }
+                    )
                 }
             }
         }

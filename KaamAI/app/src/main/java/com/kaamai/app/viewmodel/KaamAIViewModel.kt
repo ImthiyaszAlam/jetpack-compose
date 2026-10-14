@@ -46,4 +46,16 @@ class KaamAIViewModel : ViewModel() {
             showForm = false
         }
     }
+
+    fun addReport(customerParam: String, notesParam: String) {
+        if (customerParam.isNotBlank() && notesParam.isNotBlank()) {
+            _reports.add(
+                0,
+                VisitReport(
+                    customer = customerParam,
+                    notes = notesParam
+                )
+            )
+        }
+    }
 }

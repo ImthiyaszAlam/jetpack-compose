@@ -1,4 +1,3 @@
-
 package com.kaamai.app.ui.screens
 
 import androidx.compose.foundation.background
@@ -27,7 +26,10 @@ private val KaamText = Color(0xFF17243A)
 private val KaamMuted = Color(0xFF78869B)
 
 @Composable
-fun HomeScreen(viewModel: KaamAIViewModel) {
+fun HomeScreen(
+    viewModel: KaamAIViewModel,
+    onStartNewVisit: () -> Unit = {}
+) {
     val reports = viewModel.reports
     val showForm = viewModel.showForm
     val customer = viewModel.customer
@@ -102,7 +104,13 @@ fun HomeScreen(viewModel: KaamAIViewModel) {
                         Spacer(Modifier.height(20.dp))
 
                         Button(
-                            onClick = { viewModel.toggleForm() },
+                            onClick = {
+                                if (showForm) {
+                                    viewModel.toggleForm()
+                                } else {
+                                    onStartNewVisit()
+                                }
+                            },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(52.dp),
