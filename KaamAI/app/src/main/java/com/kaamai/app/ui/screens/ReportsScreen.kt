@@ -28,6 +28,7 @@ private val KaamText = Color(0xFF17243A)
 private val KaamMuted = Color(0xFF78869B)
 private val KaamBackground = Color(0xFFF7F9FC)
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReportsScreen(
     onHomeClick: () -> Unit = {},
@@ -80,218 +81,226 @@ fun ReportsScreen(
             "Today" -> report.category == "Today"
             "This Week" -> report.category == "Today" ||
                     report.category == "This Week"
+
             else -> true
         }
 
         matchesSearch && matchesFilter
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(KaamBackground)
-            .padding(horizontal = 20.dp)
-    ) {
-        Spacer(Modifier.height(20.dp))
-
-        // Screen title
-        Text(
-            text = "Reports",
-            fontSize = 27.sp,
-            fontWeight = FontWeight.Bold,
-            color = KaamText
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-        // Search field
-        OutlinedTextField(
-            value = searchQuery,
-            onValueChange = { searchQuery = it },
-            modifier = Modifier.fillMaxWidth(),
-            placeholder = {
-                Text(
-                    "Search customers or notes",
-                    fontSize = 14.sp
-                )
-            },
-            leadingIcon = {
-                Icon(
-                    Icons.Default.Search,
-                    contentDescription = "Search",
-                    tint = KaamMuted
-                )
-            },
-            singleLine = true,
-            shape = RoundedCornerShape(14.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedBorderColor = Color(0xFFE4EAF2),
-                focusedBorderColor = KaamBlue
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Reports",
+                        fontWeight = FontWeight.Bold
+                    )
+                },
+                windowInsets = WindowInsets(0, 0, 0, 0)
             )
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-        // Filters
-        Row(
+        },
+        containerColor = KaamBackground,
+        contentWindowInsets = WindowInsets(0, 0, 0, 0)
+    ) { innerPadding ->
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    Color(0xFFEAF0F8),
-                    RoundedCornerShape(50.dp)
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(horizontal = 16.dp)
+        ) {
+
+            Spacer(Modifier.height(4.dp))
+
+            // Search field
+            OutlinedTextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = {
+                    Text(
+                        "Search customers or notes",
+                        fontSize = 14.sp
+                    )
+                },
+                leadingIcon = {
+                    Icon(
+                        Icons.Default.Search,
+                        contentDescription = "Search",
+                        tint = KaamMuted
+                    )
+                },
+                singleLine = true,
+                shape = RoundedCornerShape(14.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedContainerColor = Color.White,
+                    focusedContainerColor = Color.White,
+                    unfocusedBorderColor = Color(0xFFE4EAF2),
+                    focusedBorderColor = KaamBlue
                 )
-                .padding(4.dp),
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            listOf("All", "Today", "This Week").forEach { filter ->
-                val selected = selectedFilter == filter
+            )
 
-                Surface(
-                    onClick = { selectedFilter = filter },
-                    modifier = Modifier.weight(1f),
-                    shape = RoundedCornerShape(50.dp),
-                    color = if (selected) KaamBlue
-                    else Color.Transparent
-                ) {
-                    Box(
-                        modifier = Modifier.padding(
-                            horizontal = 4.dp,
-                            vertical = 10.dp
-                        ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = filter,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = if (selected) Color.White
-                            else KaamText
-                        )
-                    }
-                }
-            }
-        }
+            Spacer(Modifier.height(16.dp))
 
-        Spacer(Modifier.height(18.dp))
+            // Filters
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        Color(0xFFEAF0F8),
+                        RoundedCornerShape(50.dp)
+                    )
+                    .padding(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                listOf("All", "Today", "This Week").forEach { filter ->
+                    val selected = selectedFilter == filter
 
-        Text(
-            text = "${filteredReports.size} reports",
-            fontSize = 13.sp,
-            color = KaamMuted
-        )
-
-        Spacer(Modifier.height(10.dp))
-
-        // Reports list
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            contentPadding = PaddingValues(bottom = 16.dp)
-        ) {
-            items(filteredReports) { report ->
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    elevation = CardDefaults.cardElevation(1.dp),
-                    onClick = {
-                        onReportClick(report.customer, report.notes)
-                    }
-                ) {
-                    Row(
-                        modifier = Modifier.padding(14.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                    Surface(
+                        onClick = { selectedFilter = filter },
+                        modifier = Modifier.weight(1f),
+                        shape = RoundedCornerShape(50.dp),
+                        color = if (selected) KaamBlue
+                        else Color.Transparent
                     ) {
                         Box(
-                            modifier = Modifier
-                                .size(46.dp)
-                                .background(
-                                    Color(0xFFEAF3FF),
-                                    RoundedCornerShape(14.dp)
-                                ),
+                            modifier = Modifier.padding(
+                                horizontal = 4.dp,
+                                vertical = 10.dp
+                            ),
                             contentAlignment = Alignment.Center
                         ) {
-                            Icon(
-                                Icons.Default.Storefront,
-                                contentDescription = null,
-                                tint = KaamBlue
-                            )
-                        }
-
-                        Spacer(Modifier.width(12.dp))
-
-                        Column(
-                            modifier = Modifier.weight(1f)
-                        ) {
                             Text(
-                                text = report.customer,
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = KaamText,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
-
-                            Spacer(Modifier.height(5.dp))
-
-                            Text(
-                                text = report.notes,
+                                text = filter,
                                 fontSize = 12.sp,
-                                color = KaamMuted,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
-
-                            Spacer(Modifier.height(5.dp))
-
-                            Text(
-                                text = report.date,
-                                fontSize = 11.sp,
-                                color = KaamMuted
+                                fontWeight = FontWeight.SemiBold,
+                                color = if (selected) Color.White
+                                else KaamText
                             )
                         }
-
-                        Icon(
-                            Icons.Default.ChevronRight,
-                            contentDescription = "View report",
-                            tint = KaamMuted
-                        )
                     }
                 }
             }
 
-            if (filteredReports.isEmpty()) {
-                item {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 36.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
+            Spacer(Modifier.height(18.dp))
+
+            Text(
+                text = "${filteredReports.size} reports",
+                fontSize = 13.sp,
+                color = KaamMuted
+            )
+
+            Spacer(Modifier.height(10.dp))
+
+            // Reports list
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                contentPadding = PaddingValues(bottom = 16.dp)
+            ) {
+                items(filteredReports) { report ->
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color.White
+                        ),
+                        elevation = CardDefaults.cardElevation(1.dp),
+                        onClick = {
+                            onReportClick(report.customer, report.notes)
+                        }
                     ) {
-                        Icon(
-                            Icons.Default.Description,
-                            contentDescription = null,
-                            tint = KaamMuted,
-                            modifier = Modifier.size(40.dp)
-                        )
+                        Row(
+                            modifier = Modifier.padding(14.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(46.dp)
+                                    .background(
+                                        Color(0xFFEAF3FF),
+                                        RoundedCornerShape(14.dp)
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    Icons.Default.Storefront,
+                                    contentDescription = null,
+                                    tint = KaamBlue
+                                )
+                            }
 
-                        Spacer(Modifier.height(10.dp))
+                            Spacer(Modifier.width(12.dp))
 
-                        Text(
-                            text = "No reports found",
-                            fontWeight = FontWeight.SemiBold,
-                            color = KaamText
-                        )
+                            Column(
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Text(
+                                    text = report.customer,
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = KaamText,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
 
-                        Text(
-                            text = "Try another search or filter.",
-                            color = KaamMuted,
-                            fontSize = 13.sp
-                        )
+                                Spacer(Modifier.height(5.dp))
+
+                                Text(
+                                    text = report.notes,
+                                    fontSize = 12.sp,
+                                    color = KaamMuted,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+
+                                Spacer(Modifier.height(5.dp))
+
+                                Text(
+                                    text = report.date,
+                                    fontSize = 11.sp,
+                                    color = KaamMuted
+                                )
+                            }
+
+                            Icon(
+                                Icons.Default.ChevronRight,
+                                contentDescription = "View report",
+                                tint = KaamMuted
+                            )
+                        }
+                    }
+                }
+
+                if (filteredReports.isEmpty()) {
+                    item {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 36.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Icon(
+                                Icons.Default.Description,
+                                contentDescription = null,
+                                tint = KaamMuted,
+                                modifier = Modifier.size(40.dp)
+                            )
+
+                            Spacer(Modifier.height(10.dp))
+
+                            Text(
+                                text = "No reports found",
+                                fontWeight = FontWeight.SemiBold,
+                                color = KaamText
+                            )
+
+                            Text(
+                                text = "Try another search or filter.",
+                                color = KaamMuted,
+                                fontSize = 13.sp
+                            )
+                        }
                     }
                 }
             }

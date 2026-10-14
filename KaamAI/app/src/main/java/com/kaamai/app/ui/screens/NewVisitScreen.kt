@@ -1,10 +1,11 @@
-
 package com.kaamai.app.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Keyboard
@@ -23,6 +24,7 @@ private val KaamBackground = Color(0xFFF7F9FC)
 private val KaamText = Color(0xFF17243A)
 private val KaamMuted = Color(0xFF78869B)
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewVisitScreen(
     onBackClick: () -> Unit,
@@ -32,40 +34,34 @@ fun NewVisitScreen(
     var notes by remember { mutableStateOf("") }
     var speakMode by remember { mutableStateOf(true) }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(KaamBackground)
-    ) {
-        // Top bar
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White)
-                .padding(horizontal = 12.dp, vertical = 10.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            IconButton(onClick = onBackClick) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "Back",
-                    tint = KaamText
-                )
-            }
-
-            Spacer(Modifier.width(8.dp))
-
-            Text(
-                text = "New Visit Report",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = KaamText
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "New Visit Report",
+                        fontWeight = FontWeight.Bold
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                },
+                windowInsets = WindowInsets(0, 0, 0, 0)
             )
-        }
-
+        },
+        containerColor = KaamBackground,
+        contentWindowInsets = WindowInsets(0, 0, 0, 0)
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
                 .padding(horizontal = 20.dp)
         ) {
             Spacer(Modifier.height(18.dp))
@@ -231,7 +227,7 @@ fun NewVisitScreen(
                 }
             }
 
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(24.dp))
 
             TextButton(
                 onClick = onBackClick,
@@ -239,6 +235,8 @@ fun NewVisitScreen(
             ) {
                 Text("Cancel", color = KaamMuted)
             }
+
+            Spacer(Modifier.height(24.dp))
         }
     }
 }
