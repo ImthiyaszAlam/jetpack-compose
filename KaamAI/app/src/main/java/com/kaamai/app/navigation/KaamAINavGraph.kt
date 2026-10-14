@@ -151,7 +151,9 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
             },
             bottomBar = {
                 if (showBottomBar) {
-                    NavigationBar {
+                    NavigationBar(
+                        containerColor = MaterialTheme.colorScheme.surface
+                    ) {
                         screens.forEach { screen ->
                             NavigationBarItem(
                                 selected = currentRoute == screen.route,
