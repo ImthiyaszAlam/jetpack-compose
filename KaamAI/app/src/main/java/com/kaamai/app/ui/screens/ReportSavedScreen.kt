@@ -83,7 +83,7 @@ fun ReportSavedScreen(
             // Saved report summary
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(18.dp),
+                shape = RoundedCornerShape(8.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = colors.surface
                 ),
@@ -100,7 +100,7 @@ fun ReportSavedScreen(
                                 .size(42.dp)
                                 .background(
                                     colors.surfaceVariant,
-                                    RoundedCornerShape(12.dp)
+                                    RoundedCornerShape(50.dp)
                                 ),
                             contentAlignment = Alignment.Center
                         ) {
@@ -210,7 +210,7 @@ fun ReportSavedScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(50.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colors.primary
                 )

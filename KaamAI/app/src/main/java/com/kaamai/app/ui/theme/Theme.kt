@@ -3,7 +3,9 @@ package com.kaamai.app.ui.theme
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -11,6 +13,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 
 val KaamBlue = Color(0xFF0866F5)
 
@@ -38,6 +41,13 @@ private val LightColorScheme = lightColorScheme(
     outline = Color(0xFFE4EAF2)
 )
 
+val AppShapes = Shapes(
+    small = RoundedCornerShape(50.dp), // 100px radius for inputs/buttons
+    medium = RoundedCornerShape(8.dp),  // 8dp radius for cards
+    large = RoundedCornerShape(8.dp),
+    extraLarge = RoundedCornerShape(50.dp)
+)
+
 @Composable
 fun KaamAITheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -57,6 +67,7 @@ fun KaamAITheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
+        shapes = AppShapes,
         typography = Typography,
         content = content
     )

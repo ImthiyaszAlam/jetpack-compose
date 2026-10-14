@@ -13,7 +13,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -38,8 +37,6 @@ fun HomeScreen(
             .background(colors.background)
             .padding(horizontal = 16.dp)
     ) {
-
-
         Spacer(Modifier.height(16.dp))
 
         LazyColumn(
@@ -49,7 +46,7 @@ fun HomeScreen(
             item {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(22.dp),
+                    shape = RoundedCornerShape(8.dp),
                     colors = CardDefaults.cardColors(
                         containerColor = colors.surfaceVariant
                     )
@@ -98,7 +95,7 @@ fun HomeScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(52.dp),
-                            shape = RoundedCornerShape(12.dp),
+                            shape = RoundedCornerShape(50.dp),
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = colors.primary
                             )
@@ -122,7 +119,7 @@ fun HomeScreen(
                 item {
                     Card(
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(18.dp),
+                        shape = RoundedCornerShape(8.dp),
                         colors = CardDefaults.cardColors(
                             containerColor = colors.surface
                         )
@@ -146,7 +143,7 @@ fun HomeScreen(
                                 },
                                 label = { Text("Customer name") },
                                 modifier = Modifier.fillMaxWidth(),
-                                shape = RoundedCornerShape(12.dp),
+                                shape = RoundedCornerShape(50.dp),
                                 singleLine = true
                             )
 
@@ -162,7 +159,7 @@ fun HomeScreen(
                                     Text("What happened during the visit?")
                                 },
                                 modifier = Modifier.fillMaxWidth(),
-                                shape = RoundedCornerShape(12.dp),
+                                shape = RoundedCornerShape(50.dp),
                                 minLines = 3
                             )
 
@@ -175,7 +172,7 @@ fun HomeScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(48.dp),
-                                shape = RoundedCornerShape(12.dp),
+                                shape = RoundedCornerShape(50.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = colors.primary
                                 )
@@ -214,7 +211,7 @@ fun HomeScreen(
                 item {
                     Card(
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(8.dp),
                         colors = CardDefaults.cardColors(
                             containerColor = colors.surface
                         )
@@ -263,7 +260,7 @@ fun HomeScreen(
                 items(reports) { report ->
                     Card(
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(8.dp),
                         colors = CardDefaults.cardColors(
                             containerColor = colors.surface
                         ),
@@ -278,7 +275,7 @@ fun HomeScreen(
                                     .size(46.dp)
                                     .background(
                                         colors.surfaceVariant,
-                                        RoundedCornerShape(14.dp)
+                                        RoundedCornerShape(50.dp)
                                     ),
                                 contentAlignment = Alignment.Center
                             ) {

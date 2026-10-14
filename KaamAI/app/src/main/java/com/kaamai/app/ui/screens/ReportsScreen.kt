@@ -107,7 +107,7 @@ fun ReportsScreen(
                 )
             },
             singleLine = true,
-            shape = RoundedCornerShape(14.dp),
+            shape = RoundedCornerShape(50.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 unfocusedContainerColor = colors.surface,
                 focusedContainerColor = colors.surface,
@@ -176,7 +176,7 @@ fun ReportsScreen(
             items(filteredReports) { report ->
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
+                    shape = RoundedCornerShape(8.dp),
                     colors = CardDefaults.cardColors(
                         containerColor = colors.surface
                     ),
@@ -194,7 +194,7 @@ fun ReportsScreen(
                                 .size(46.dp)
                                 .background(
                                     colors.surfaceVariant,
-                                    RoundedCornerShape(14.dp)
+                                    RoundedCornerShape(50.dp)
                                 ),
                             contentAlignment = Alignment.Center
                         ) {

@@ -50,7 +50,7 @@ fun ReviewConfirmScreen(
         // AI information card
         Card(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(18.dp),
+            shape = RoundedCornerShape(8.dp),
             colors = CardDefaults.cardColors(
                 containerColor = colors.surfaceVariant
             ),
@@ -97,7 +97,7 @@ fun ReviewConfirmScreen(
         // Report details
         Card(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(18.dp),
+            shape = RoundedCornerShape(8.dp),
             colors = CardDefaults.cardColors(
                 containerColor = colors.surface
             ),
@@ -188,7 +188,7 @@ fun ReviewConfirmScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(50.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colors.primary
                 )
@@ -212,7 +212,7 @@ fun ReviewConfirmScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(46.dp),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(50.dp)
             ) {
                 Text(
                     if (isEditing) "Finish Editing" else "Edit Details",
@@ -244,7 +244,7 @@ private fun DetailRow(
                 .size(38.dp)
                 .background(
                     colors.surfaceVariant,
-                    RoundedCornerShape(12.dp)
+                    RoundedCornerShape(50.dp)
                 ),
             contentAlignment = Alignment.Center
         ) {
@@ -267,7 +267,7 @@ private fun DetailRow(
                     value = value,
                     onValueChange = onValueChange,
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(10.dp),
+                    shape = RoundedCornerShape(50.dp),
                     textStyle = LocalTextStyle.current.copy(
                         fontSize = 14.sp,
                         color = colors.onSurface

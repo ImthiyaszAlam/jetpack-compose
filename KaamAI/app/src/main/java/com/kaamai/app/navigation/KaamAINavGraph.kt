@@ -37,7 +37,8 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
 
     val screens = listOf(KaamAIScreen.Home, KaamAIScreen.Reports)
     val showTopBar = true
-    val showBottomBar = currentRoute == null || currentRoute == KaamAIScreen.Home.route || currentRoute == KaamAIScreen.Reports.route
+    val showBottomBar =
+        currentRoute == null || currentRoute == KaamAIScreen.Home.route || currentRoute == KaamAIScreen.Reports.route
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -88,12 +89,14 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
                                         fontWeight = FontWeight.Bold
                                     )
                                 }
+
                                 KaamAIScreen.NewVisit.route -> {
                                     Text(
                                         text = "New Visit Report",
                                         fontWeight = FontWeight.Bold
                                     )
                                 }
+
                                 else -> {
                                     Column {
                                         Text(
@@ -155,19 +158,20 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
                 if (showBottomBar) {
                     Surface(
                         color = MaterialTheme.colorScheme.surface,
-                        tonalElevation = 0.dp
+                        tonalElevation = 8.dp
                     ) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .navigationBarsPadding()
-                                .height(56.dp),
+                                .height(60.dp),
                             horizontalArrangement = Arrangement.SpaceAround,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             screens.forEach { screen ->
                                 val selected = currentRoute == screen.route
-                                val color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                                val color =
+                                    if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
 
                                 Column(
                                     modifier = Modifier

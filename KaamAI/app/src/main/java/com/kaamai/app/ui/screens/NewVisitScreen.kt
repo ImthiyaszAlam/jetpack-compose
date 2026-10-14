@@ -52,7 +52,7 @@ fun NewVisitScreen(
                 .fillMaxWidth()
                 .background(
                     colors.surfaceVariant,
-                    RoundedCornerShape(14.dp)
+                    RoundedCornerShape(50.dp)
                 )
                 .padding(4.dp)
         ) {
@@ -134,7 +134,7 @@ fun NewVisitScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(colors.surface, RoundedCornerShape(18.dp))
+                .background(colors.surface, RoundedCornerShape(8.dp))
                 .padding(16.dp)
         ) {
             Text(
@@ -151,7 +151,7 @@ fun NewVisitScreen(
                 onValueChange = { customer = it },
                 placeholder = { Text("Enter customer name") },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(50.dp),
                 singleLine = true
             )
 
@@ -173,7 +173,7 @@ fun NewVisitScreen(
                     Text("What happened during the visit?")
                 },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(50.dp),
                 minLines = 3
             )
 
@@ -187,7 +187,7 @@ fun NewVisitScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(50.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colors.primary
                 )
@@ -225,7 +225,7 @@ private fun ModeButton(
     Surface(
         onClick = onClick,
         modifier = modifier.height(44.dp),
-        shape = RoundedCornerShape(11.dp),
+        shape = RoundedCornerShape(50.dp),
         color = if (selected) colors.primary else Color.Transparent
     ) {
         Row(
