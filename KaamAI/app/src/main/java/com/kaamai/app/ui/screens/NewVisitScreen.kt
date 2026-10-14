@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Keyboard
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material3.*
@@ -19,7 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewVisitScreen(
     onBackClick: () -> Unit,
@@ -31,212 +29,186 @@ fun NewVisitScreen(
 
     val colors = MaterialTheme.colorScheme
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "New Visit Report",
-                        fontWeight = FontWeight.Bold,
-                        color = colors.onBackground
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBackClick) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back",
-                            tint = colors.onSurface
-                        )
-                    }
-                },
-                windowInsets = WindowInsets(0, 0, 0, 0)
-            )
-        },
-        containerColor = colors.background,
-        contentWindowInsets = WindowInsets(0, 0, 0, 0)
-    ) { innerPadding ->
-        Column(
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colors.background)
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 20.dp)
+    ) {
+        Spacer(Modifier.height(18.dp))
+
+        Text(
+            text = "Capture your customer visit in seconds.",
+            fontSize = 14.sp,
+            color = colors.onSurfaceVariant
+        )
+
+        Spacer(Modifier.height(22.dp))
+
+        // Input mode selector
+        Row(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 20.dp)
+                .fillMaxWidth()
+                .background(
+                    colors.surfaceVariant,
+                    RoundedCornerShape(14.dp)
+                )
+                .padding(4.dp)
         ) {
-            Spacer(Modifier.height(18.dp))
-
-            Text(
-                text = "Capture your customer visit in seconds.",
-                fontSize = 14.sp,
-                color = colors.onSurfaceVariant
+            ModeButton(
+                text = "Type",
+                icon = {
+                    Icon(
+                        Icons.Default.Keyboard,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
+                },
+                selected = !speakMode,
+                modifier = Modifier.weight(1f),
+                onClick = { speakMode = false }
             )
 
-            Spacer(Modifier.height(22.dp))
-
-            // Input mode selector
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(
-                        colors.surfaceVariant,
-                        RoundedCornerShape(14.dp)
+            ModeButton(
+                text = "Speak",
+                icon = {
+                    Icon(
+                        Icons.Default.Mic,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
                     )
-                    .padding(4.dp)
+                },
+                selected = speakMode,
+                modifier = Modifier.weight(1f),
+                onClick = { speakMode = true }
+            )
+        }
+
+        Spacer(Modifier.height(24.dp))
+
+        // Microphone illustration
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Surface(
+                modifier = Modifier.size(100.dp),
+                shape = CircleShape,
+                color = colors.surfaceVariant
             ) {
-                ModeButton(
-                    text = "Type",
-                    icon = {
-                        Icon(
-                            Icons.Default.Keyboard,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                    },
-                    selected = !speakMode,
-                    modifier = Modifier.weight(1f),
-                    onClick = { speakMode = false }
-                )
-
-                ModeButton(
-                    text = "Speak",
-                    icon = {
-                        Icon(
-                            Icons.Default.Mic,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                    },
-                    selected = speakMode,
-                    modifier = Modifier.weight(1f),
-                    onClick = { speakMode = true }
-                )
-            }
-
-            Spacer(Modifier.height(24.dp))
-
-            // Microphone illustration
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Surface(
-                    modifier = Modifier.size(100.dp),
-                    shape = CircleShape,
-                    color = colors.surfaceVariant
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Surface(
-                            modifier = Modifier.size(72.dp),
-                            shape = CircleShape,
-                            color = colors.primary
-                        ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                Icon(
-                                    imageVector = Icons.Default.Mic,
-                                    contentDescription = "Microphone",
-                                    tint = colors.onPrimary,
-                                    modifier = Modifier.size(32.dp)
-                                )
-                            }
+                Box(contentAlignment = Alignment.Center) {
+                    Surface(
+                        modifier = Modifier.size(72.dp),
+                        shape = CircleShape,
+                        color = colors.primary
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                imageVector = Icons.Default.Mic,
+                                contentDescription = "Microphone",
+                                tint = colors.onPrimary,
+                                modifier = Modifier.size(32.dp)
+                            )
                         }
                     }
                 }
-
-                Spacer(Modifier.height(12.dp))
-
-                Text(
-                    text = if (speakMode) {
-                        "Voice recording coming next"
-                    } else {
-                        "Enter your visit details below"
-                    },
-                    fontSize = 13.sp,
-                    color = colors.onSurfaceVariant
-                )
             }
 
-            Spacer(Modifier.height(22.dp))
+            Spacer(Modifier.height(12.dp))
 
-            // Visit form
-            Column(
+            Text(
+                text = if (speakMode) {
+                    "Voice recording coming next"
+                } else {
+                    "Enter your visit details below"
+                },
+                fontSize = 13.sp,
+                color = colors.onSurfaceVariant
+            )
+        }
+
+        Spacer(Modifier.height(22.dp))
+
+        // Visit form
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(colors.surface, RoundedCornerShape(18.dp))
+                .padding(16.dp)
+        ) {
+            Text(
+                text = "Customer name",
+                fontSize = 13.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = colors.onSurface
+            )
+
+            Spacer(Modifier.height(8.dp))
+
+            OutlinedTextField(
+                value = customer,
+                onValueChange = { customer = it },
+                placeholder = { Text("Enter customer name") },
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                singleLine = true
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            Text(
+                text = "Visit notes",
+                fontSize = 13.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = colors.onSurface
+            )
+
+            Spacer(Modifier.height(8.dp))
+
+            OutlinedTextField(
+                value = notes,
+                onValueChange = { notes = it },
+                placeholder = {
+                    Text("What happened during the visit?")
+                },
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                minLines = 3
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            Button(
+                onClick = {
+                    onSaveClick(customer.trim(), notes.trim())
+                },
+                enabled = customer.isNotBlank() && notes.isNotBlank(),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(colors.surface, RoundedCornerShape(18.dp))
-                    .padding(16.dp)
+                    .height(50.dp),
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colors.primary
+                )
             ) {
                 Text(
-                    text = "Customer name",
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = colors.onSurface
+                    text = "Save Report",
+                    fontWeight = FontWeight.SemiBold
                 )
-
-                Spacer(Modifier.height(8.dp))
-
-                OutlinedTextField(
-                    value = customer,
-                    onValueChange = { customer = it },
-                    placeholder = { Text("Enter customer name") },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    singleLine = true
-                )
-
-                Spacer(Modifier.height(16.dp))
-
-                Text(
-                    text = "Visit notes",
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = colors.onSurface
-                )
-
-                Spacer(Modifier.height(8.dp))
-
-                OutlinedTextField(
-                    value = notes,
-                    onValueChange = { notes = it },
-                    placeholder = {
-                        Text("What happened during the visit?")
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    minLines = 3
-                )
-
-                Spacer(Modifier.height(16.dp))
-
-                Button(
-                    onClick = {
-                        onSaveClick(customer.trim(), notes.trim())
-                    },
-                    enabled = customer.isNotBlank() && notes.isNotBlank(),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(50.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = colors.primary
-                    )
-                ) {
-                    Text(
-                        text = "Save Report",
-                        fontWeight = FontWeight.SemiBold
-                    )
-                }
             }
-
-            Spacer(Modifier.height(24.dp))
-
-            TextButton(
-                onClick = onBackClick,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            ) {
-                Text("Cancel", color = colors.onSurfaceVariant)
-            }
-
-            Spacer(Modifier.height(24.dp))
         }
+
+        Spacer(Modifier.height(24.dp))
+
+        TextButton(
+            onClick = onBackClick,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        ) {
+            Text("Cancel", color = colors.onSurfaceVariant)
+        }
+
+        Spacer(Modifier.height(24.dp))
     }
 }
 

@@ -36,24 +36,11 @@ fun HomeScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(colors.background)
-            .padding(horizontal = 20.dp)
+            .padding(horizontal = 16.dp)
     ) {
-        Spacer(Modifier.height(20.dp))
 
-        Text(
-            text = "KaamAI",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = colors.onBackground
-        )
 
-        Text(
-            text = "Your workday, made simpler.",
-            fontSize = 13.sp,
-            color = colors.onSurfaceVariant
-        )
-
-        Spacer(Modifier.height(24.dp))
+        Spacer(Modifier.height(16.dp))
 
         LazyColumn(
             modifier = Modifier.weight(1f),

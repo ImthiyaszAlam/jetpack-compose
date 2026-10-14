@@ -2,12 +2,12 @@ package com.kaamai.app.navigation
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,7 +34,7 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
     val scope = rememberCoroutineScope()
 
     val screens = listOf(KaamAIScreen.Home, KaamAIScreen.Reports)
-    val showTopBar = currentRoute == null || currentRoute == KaamAIScreen.Home.route
+    val showTopBar = true
     val showBottomBar = currentRoute == null || currentRoute == KaamAIScreen.Home.route || currentRoute == KaamAIScreen.Reports.route
 
     ModalNavigationDrawer(
@@ -79,40 +79,71 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
                 if (showTopBar) {
                     TopAppBar(
                         title = {
-                            Column {
-                                Text(
-                                    text = "KaamAI",
-                                    fontWeight = FontWeight.Bold
-                                )
-                                Text(
-                                    text = "Your workday, made simpler.",
-                                    fontSize = 12.sp,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
+                            when (currentRoute) {
+                                KaamAIScreen.Reports.route -> {
+                                    Text(
+                                        text = "Reports",
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
+                                KaamAIScreen.NewVisit.route -> {
+                                    Text(
+                                        text = "New Visit Report",
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
+                                else -> {
+                                    Column {
+                                        Text(
+                                            text = "KaamAI",
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                        Text(
+                                            text = "Your workday, made simpler.",
+                                            fontSize = 12.sp,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                }
                             }
                         },
                         navigationIcon = {
-                            IconButton(
-                                onClick = {
-                                    scope.launch { drawerState.open() }
+                            if (currentRoute == KaamAIScreen.NewVisit.route) {
+                                IconButton(
+                                    onClick = {
+                                        navController.popBackStack()
+                                    }
+                                ) {
+                                    Icon(
+                                        Icons.AutoMirrored.Filled.ArrowBack,
+                                        contentDescription = "Back"
+                                    )
                                 }
-                            ) {
-                                Icon(
-                                    Icons.Default.Menu,
-                                    contentDescription = "Open menu"
-                                )
+                            } else {
+                                IconButton(
+                                    onClick = {
+                                        scope.launch { drawerState.open() }
+                                    }
+                                ) {
+                                    Icon(
+                                        Icons.Default.Menu,
+                                        contentDescription = "Open menu"
+                                    )
+                                }
                             }
                         },
                         actions = {
-                            IconButton(
-                                onClick = {
-                                    // Notifications screen action if needed
+                            if (currentRoute == KaamAIScreen.Home.route || currentRoute == null) {
+                                IconButton(
+                                    onClick = {
+                                        // Notifications
+                                    }
+                                ) {
+                                    Icon(
+                                        Icons.Default.Notifications,
+                                        contentDescription = "Notifications"
+                                    )
                                 }
-                            ) {
-                                Icon(
-                                    Icons.Default.Notifications,
-                                    contentDescription = "Notifications"
-                                )
                             }
                         }
                     )
