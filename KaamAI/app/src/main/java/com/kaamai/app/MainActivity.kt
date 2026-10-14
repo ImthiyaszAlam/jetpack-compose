@@ -1,4 +1,3 @@
-
 package com.kaamai.app
 
 import android.os.Bundle
@@ -8,10 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.kaamai.app.ui.screens.KaamAIHome
+import com.kaamai.app.navigation.KaamAINavGraph
 import com.kaamai.app.ui.theme.KaamAITheme
-
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,11 +20,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    KaamAIHome()
+                    KaamAINavGraph()
                 }
             }
         }
     }
 }
-
-
