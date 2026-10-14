@@ -2,12 +2,14 @@ package com.kaamai.app.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Storefront
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -22,7 +24,8 @@ import com.kaamai.app.viewmodel.KaamAIViewModel
 @Composable
 fun HomeScreen(
     viewModel: KaamAIViewModel,
-    onStartNewVisit: () -> Unit = {}
+    onStartNewVisit: () -> Unit = {},
+    onReportClick: (String, String) -> Unit = { _, _ -> }
 ) {
     val reports = viewModel.reports
     val showForm = viewModel.showForm
@@ -52,7 +55,7 @@ fun HomeScreen(
                     )
                 ) {
                     Column(
-                        modifier = Modifier.padding(20.dp)
+                        modifier = Modifier.padding(16.dp)
                     ) {
                         Text(
                             text = "✦  YOUR FIELDWORK ASSISTANT",
@@ -62,27 +65,7 @@ fun HomeScreen(
                             letterSpacing = 1.sp
                         )
 
-                        Spacer(Modifier.height(14.dp))
-
-                        Text(
-                            text = "Work smarter.\nReport faster.",
-                            fontSize = 27.sp,
-                            lineHeight = 33.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = colors.onSurface
-                        )
-
-                        Spacer(Modifier.height(8.dp))
-
-                        Text(
-                            text = "Record customer visits and keep your " +
-                                    "daily work organised.",
-                            fontSize = 14.sp,
-                            lineHeight = 21.sp,
-                            color = colors.onSurfaceVariant
-                        )
-
-                        Spacer(Modifier.height(20.dp))
+                        Spacer(Modifier.height(16.dp))
 
                         Button(
                             onClick = {
@@ -257,6 +240,8 @@ fun HomeScreen(
                     }
                 }
             } else {
+
+
                 items(reports) { report ->
                     Card(
                         modifier = Modifier.fillMaxWidth(),
@@ -264,10 +249,13 @@ fun HomeScreen(
                         colors = CardDefaults.cardColors(
                             containerColor = colors.surface
                         ),
-                        elevation = CardDefaults.cardElevation(1.dp)
+                        elevation = CardDefaults.cardElevation(1.dp),
+                        onClick = {
+                            onReportClick(report.customer, report.notes)
+                        }
                     ) {
                         Row(
-                            modifier = Modifier.padding(14.dp),
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Box(
@@ -280,43 +268,41 @@ fun HomeScreen(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(
-                                    imageVector = Icons.Default.Storefront,
+                                    Icons.Default.Storefront,
                                     contentDescription = null,
                                     tint = colors.primary
                                 )
                             }
 
                             Spacer(Modifier.width(12.dp))
-
                             Column(
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier.weight(1f),
+                                verticalArrangement = Arrangement.spacedBy(2.dp)
                             ) {
                                 Text(
                                     text = report.customer,
-                                    fontSize = 15.sp,
-                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 14.sp,
+                                    lineHeight = 16.sp,
+                                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
                                     color = colors.onSurface,
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )
 
-                                Spacer(Modifier.height(5.dp))
-
                                 Text(
                                     text = report.notes,
                                     fontSize = 12.sp,
+                                    lineHeight = 14.sp,
                                     color = colors.onSurfaceVariant,
-                                    maxLines = 2,
+                                    maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )
                             }
 
-                            Spacer(Modifier.width(8.dp))
-
-                            Text(
-                                text = "›",
-                                fontSize = 28.sp,
-                                color = colors.onSurfaceVariant
+                            Icon(
+                                Icons.Default.ChevronRight,
+                                contentDescription = "View report",
+                                tint = colors.onSurfaceVariant
                             )
                         }
                     }

@@ -186,7 +186,7 @@ fun ReportsScreen(
                     }
                 ) {
                     Row(
-                        modifier = Modifier.padding(14.dp),
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Box(
@@ -206,34 +206,33 @@ fun ReportsScreen(
                         }
 
                         Spacer(Modifier.width(12.dp))
-
                         Column(
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier.weight(1f),
+                            verticalArrangement = Arrangement.spacedBy(2.dp)
                         ) {
                             Text(
                                 text = report.customer,
                                 fontSize = 14.sp,
+                                lineHeight = 16.sp,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
                                 color = colors.onSurface,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
                             )
 
-                            Spacer(Modifier.height(5.dp))
-
                             Text(
                                 text = report.notes,
                                 fontSize = 12.sp,
+                                lineHeight = 14.sp,
                                 color = colors.onSurfaceVariant,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
                             )
 
-                            Spacer(Modifier.height(5.dp))
-
                             Text(
                                 text = report.date,
                                 fontSize = 11.sp,
+                                lineHeight = 13.sp,
                                 color = colors.onSurfaceVariant
                             )
                         }

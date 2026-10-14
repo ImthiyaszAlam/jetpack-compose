@@ -1,5 +1,6 @@
 package com.kaamai.app.navigation
 
+import android.R
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -10,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,7 +45,7 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet {
+            ModalDrawerSheet(modifier = Modifier.width(260.dp)) {
                 Text(
                     text = "KaamAI",
                     fontSize = 26.sp,
@@ -53,6 +55,8 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
                 )
 
                 HorizontalDivider()
+
+                Spacer(modifier = Modifier.height(16.dp))
 
                 screens.forEach { screen ->
                     NavigationDrawerItem(
@@ -101,11 +105,13 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
                                     Column {
                                         Text(
                                             text = "KaamAI",
+                                            color = MaterialTheme.colorScheme.primary,
                                             fontWeight = FontWeight.Bold
                                         )
                                         Text(
                                             text = "Your workday, made simpler.",
                                             fontSize = 12.sp,
+                                            lineHeight = 13.sp,
                                             color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
                                     }
@@ -158,7 +164,7 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
                 if (showBottomBar) {
                     Surface(
                         color = MaterialTheme.colorScheme.surface,
-                        tonalElevation = 8.dp
+                        tonalElevation = 0.dp
                     ) {
                         Row(
                             modifier = Modifier

@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kaamai.app.components.ModeButton
 
 @Composable
 fun NewVisitScreen(
@@ -32,19 +33,12 @@ fun NewVisitScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .imePadding()
             .background(colors.background)
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 20.dp)
+            .padding(all = 16.dp)
     ) {
-        Spacer(Modifier.height(18.dp))
 
-        Text(
-            text = "Capture your customer visit in seconds.",
-            fontSize = 14.sp,
-            color = colors.onSurfaceVariant
-        )
-
-        Spacer(Modifier.height(22.dp))
 
         // Input mode selector
         Row(
@@ -212,39 +206,4 @@ fun NewVisitScreen(
     }
 }
 
-@Composable
-private fun ModeButton(
-    text: String,
-    icon: @Composable () -> Unit,
-    selected: Boolean,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
-) {
-    val colors = MaterialTheme.colorScheme
 
-    Surface(
-        onClick = onClick,
-        modifier = modifier.height(44.dp),
-        shape = RoundedCornerShape(50.dp),
-        color = if (selected) colors.primary else Color.Transparent
-    ) {
-        Row(
-            modifier = Modifier.fillMaxSize(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            CompositionLocalProvider(
-                LocalContentColor provides
-                        if (selected) colors.onPrimary else colors.onSurface
-            ) {
-                icon()
-                Spacer(Modifier.width(7.dp))
-                Text(
-                    text = text,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold
-                )
-            }
-        }
-    }
-}
