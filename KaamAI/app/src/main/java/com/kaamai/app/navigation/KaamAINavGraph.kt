@@ -33,6 +33,8 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
     val scope = rememberCoroutineScope()
 
     val screens = listOf(KaamAIScreen.Home, KaamAIScreen.Reports)
+    val showTopBar = currentRoute == null || currentRoute == KaamAIScreen.Home.route
+    val showBottomBar = currentRoute == null || currentRoute == KaamAIScreen.Home.route || currentRoute == KaamAIScreen.Reports.route
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -73,65 +75,69 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
     ) {
         Scaffold(
             topBar = {
-                TopAppBar(
-                    title = {
-                        Column {
-                            Text(
-                                text = "KaamAI",
-                                fontWeight = FontWeight.Bold
-                            )
-                            Text(
-                                text = "Your workday, made simpler.",
-                                fontSize = 12.sp,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    },
-                    navigationIcon = {
-                        IconButton(
-                            onClick = {
-                                scope.launch { drawerState.open() }
+                if (showTopBar) {
+                    TopAppBar(
+                        title = {
+                            Column {
+                                Text(
+                                    text = "KaamAI",
+                                    fontWeight = FontWeight.Bold
+                                )
+                                Text(
+                                    text = "Your workday, made simpler.",
+                                    fontSize = 12.sp,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
                             }
-                        ) {
-                            Icon(
-                                Icons.Default.Menu,
-                                contentDescription = "Open menu"
-                            )
-                        }
-                    },
-                    actions = {
-                        IconButton(
-                            onClick = {
-                                // Notifications screen action if needed
+                        },
+                        navigationIcon = {
+                            IconButton(
+                                onClick = {
+                                    scope.launch { drawerState.open() }
+                                }
+                            ) {
+                                Icon(
+                                    Icons.Default.Menu,
+                                    contentDescription = "Open menu"
+                                )
                             }
-                        ) {
-                            Icon(
-                                Icons.Default.Notifications,
-                                contentDescription = "Notifications"
-                            )
+                        },
+                        actions = {
+                            IconButton(
+                                onClick = {
+                                    // Notifications screen action if needed
+                                }
+                            ) {
+                                Icon(
+                                    Icons.Default.Notifications,
+                                    contentDescription = "Notifications"
+                                )
+                            }
                         }
-                    }
-                )
+                    )
+                }
             },
             bottomBar = {
-                NavigationBar {
-                    screens.forEach { screen ->
-                        NavigationBarItem(
-                            selected = currentRoute == screen.route,
-                            onClick = {
-                                if (currentRoute != screen.route) {
-                                    navController.navigate(screen.route) {
-                                        popUpTo(navController.graph.findStartDestination().id) {
-                                            saveState = true
+                if (showBottomBar) {
+                    NavigationBar {
+                        screens.forEach { screen ->
+                            NavigationBarItem(
+                                selected = currentRoute == screen.route,
+                                onClick = {
+                                    if (currentRoute != screen.route) {
+                                        navController.navigate(screen.route) {
+                                            popUpTo(navController.graph.findStartDestination().id) {
+                                                saveState = true
+                                            }
+                                            launchSingleTop = true
+                                            restoreState = true
                                         }
-                                        launchSingleTop = true
-                                        restoreState = true
                                     }
-                                }
-                            },
-                            icon = { Icon(screen.icon, contentDescription = screen.title) },
-                            label = { Text(screen.title) }
-                        )
+                                },
+                                icon = { Icon(screen.icon, contentDescription = screen.title) },
+                                label = { Text(screen.title) }
+                            )
+                        }
                     }
                 }
             }
