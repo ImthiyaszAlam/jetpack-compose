@@ -22,18 +22,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kaamai.app.data.ReportItem
 
 private val KaamBlue = Color(0xFF0866F5)
 private val KaamText = Color(0xFF17243A)
 private val KaamMuted = Color(0xFF78869B)
 private val KaamBackground = Color(0xFFF7F9FC)
 
-private data class ReportItem(
-    val customer: String,
-    val notes: String,
-    val date: String,
-    val category: String
-)
+
 
 @Composable
 fun ReportsScreen(
@@ -95,41 +91,6 @@ fun ReportsScreen(
 
     Scaffold(
         containerColor = KaamBackground,
-        bottomBar = {
-            NavigationBar(
-                containerColor = Color.White,
-                tonalElevation = 4.dp
-            ) {
-                NavigationBarItem(
-                    selected = false,
-                    onClick = onHomeClick,
-                    icon = {
-                        Icon(
-                            Icons.Default.Home,
-                            contentDescription = "Home"
-                        )
-                    },
-                    label = { Text("Home") }
-                )
-
-                NavigationBarItem(
-                    selected = true,
-                    onClick = {},
-                    icon = {
-                        Icon(
-                            Icons.Default.Description,
-                            contentDescription = "Reports"
-                        )
-                    },
-                    label = { Text("Reports") },
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = KaamBlue,
-                        selectedTextColor = KaamBlue,
-                        indicatorColor = Color(0xFFE8F1FF)
-                    )
-                )
-            }
-        }
     ) { innerPadding ->
 
         Column(
