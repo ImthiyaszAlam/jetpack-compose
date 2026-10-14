@@ -1,4 +1,3 @@
-
 package com.kaamai.app.ui.screens
 
 import androidx.compose.foundation.background
@@ -23,11 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-private val KaamBlue = Color(0xFF0866F5)
-private val KaamText = Color(0xFF17243A)
-private val KaamMuted = Color(0xFF78869B)
-private val KaamBackground = Color(0xFFF7F9FC)
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReviewConfirmScreen(
     customerName: String,
@@ -44,39 +39,36 @@ fun ReviewConfirmScreen(
     }
     var isEditing by remember { mutableStateOf(false) }
 
+    val colors = MaterialTheme.colorScheme
+
     Scaffold(
-        containerColor = KaamBackground,
+        containerColor = colors.background,
         topBar = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.White)
-                    .padding(horizontal = 16.dp, vertical = 14.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(onClick = onBackClick) {
-                    Icon(
-                        Icons.Default.ArrowBack,
-                        contentDescription = "Back",
-                        tint = KaamText
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Review & Confirm",
+                        fontWeight = FontWeight.Bold,
+                        color = colors.onBackground
                     )
-                }
-
-                Spacer(Modifier.width(8.dp))
-
-                Text(
-                    text = "Review & Confirm",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = KaamText
-                )
-            }
+                },
+                navigationIcon = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            contentDescription = "Back",
+                            tint = colors.onSurface
+                        )
+                    }
+                },
+                windowInsets = WindowInsets(0, 0, 0, 0)
+            )
         },
         bottomBar = {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.White)
+                    .background(colors.surface)
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
@@ -87,7 +79,7 @@ fun ReviewConfirmScreen(
                         .height(50.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = KaamBlue
+                        containerColor = colors.primary
                     )
                 ) {
                     Icon(
@@ -113,11 +105,12 @@ fun ReviewConfirmScreen(
                 ) {
                     Text(
                         if (isEditing) "Finish Editing" else "Edit Details",
-                        color = KaamBlue
+                        color = colors.primary
                     )
                 }
             }
-        }
+        },
+        contentWindowInsets = WindowInsets(0, 0, 0, 0)
     ) { innerPadding ->
 
         Column(
@@ -133,7 +126,7 @@ fun ReviewConfirmScreen(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(18.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFFEAF3FF)
+                    containerColor = colors.surfaceVariant
                 ),
                 elevation = CardDefaults.cardElevation(0.dp)
             ) {
@@ -144,13 +137,13 @@ fun ReviewConfirmScreen(
                     Box(
                         modifier = Modifier
                             .size(44.dp)
-                            .background(Color.White, CircleShape),
+                            .background(colors.surface, CircleShape),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = "✦",
                             fontSize = 24.sp,
-                            color = KaamBlue
+                            color = colors.primary
                         )
                     }
 
@@ -161,7 +154,7 @@ fun ReviewConfirmScreen(
                             text = "AI has extracted the key details",
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Bold,
-                            color = KaamText
+                            color = colors.onSurface
                         )
 
                         Spacer(Modifier.height(4.dp))
@@ -169,7 +162,7 @@ fun ReviewConfirmScreen(
                         Text(
                             text = "Review everything before saving.",
                             fontSize = 12.sp,
-                            color = KaamMuted
+                            color = colors.onSurfaceVariant
                         )
                     }
                 }
@@ -180,7 +173,7 @@ fun ReviewConfirmScreen(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(18.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color.White
+                    containerColor = colors.surface
                 ),
                 elevation = CardDefaults.cardElevation(1.dp)
             ) {
@@ -190,7 +183,7 @@ fun ReviewConfirmScreen(
                             Icon(
                                 Icons.Default.Storefront,
                                 contentDescription = null,
-                                tint = KaamBlue
+                                tint = colors.primary
                             )
                         },
                         label = "Customer",
@@ -199,14 +192,14 @@ fun ReviewConfirmScreen(
                         onValueChange = { customer = it }
                     )
 
-                    HorizontalDivider(color = Color(0xFFEDF0F5))
+                    HorizontalDivider(color = colors.outline)
 
                     DetailRow(
                         icon = {
                             Icon(
                                 Icons.Default.CalendarMonth,
                                 contentDescription = null,
-                                tint = KaamBlue
+                                tint = colors.primary
                             )
                         },
                         label = "Visit date",
@@ -215,14 +208,14 @@ fun ReviewConfirmScreen(
                         onValueChange = {}
                     )
 
-                    HorizontalDivider(color = Color(0xFFEDF0F5))
+                    HorizontalDivider(color = colors.outline)
 
                     DetailRow(
                         icon = {
                             Icon(
                                 Icons.Default.Inventory2,
                                 contentDescription = null,
-                                tint = KaamBlue
+                                tint = colors.primary
                             )
                         },
                         label = "Visit summary",
@@ -231,7 +224,7 @@ fun ReviewConfirmScreen(
                         onValueChange = { notes = it }
                     )
 
-                    HorizontalDivider(color = Color(0xFFEDF0F5))
+                    HorizontalDivider(color = colors.outline)
 
                     DetailRow(
                         icon = {
@@ -253,7 +246,7 @@ fun ReviewConfirmScreen(
                 text = "Please verify the customer name and visit summary. " +
                         "AI-generated details may need correction.",
                 fontSize = 12.sp,
-                color = KaamMuted,
+                color = colors.onSurfaceVariant,
                 lineHeight = 18.sp
             )
 
@@ -270,6 +263,8 @@ private fun DetailRow(
     editable: Boolean,
     onValueChange: (String) -> Unit
 ) {
+    val colors = MaterialTheme.colorScheme
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -280,7 +275,7 @@ private fun DetailRow(
             modifier = Modifier
                 .size(38.dp)
                 .background(
-                    Color(0xFFEAF3FF),
+                    colors.surfaceVariant,
                     RoundedCornerShape(12.dp)
                 ),
             contentAlignment = Alignment.Center
@@ -294,7 +289,7 @@ private fun DetailRow(
             Text(
                 text = label,
                 fontSize = 12.sp,
-                color = KaamMuted
+                color = colors.onSurfaceVariant
             )
 
             Spacer(Modifier.height(5.dp))
@@ -307,7 +302,7 @@ private fun DetailRow(
                     shape = RoundedCornerShape(10.dp),
                     textStyle = LocalTextStyle.current.copy(
                         fontSize = 14.sp,
-                        color = KaamText
+                        color = colors.onSurface
                     )
                 )
             } else {
@@ -315,7 +310,7 @@ private fun DetailRow(
                     text = value.ifBlank { "Not provided" },
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = KaamText,
+                    color = colors.onSurface,
                     lineHeight = 20.sp
                 )
             }

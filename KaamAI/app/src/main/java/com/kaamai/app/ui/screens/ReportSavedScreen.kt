@@ -1,4 +1,3 @@
-
 package com.kaamai.app.ui.screens
 
 import androidx.compose.foundation.background
@@ -21,12 +20,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-private val KaamBlue = Color(0xFF0866F5)
-private val KaamText = Color(0xFF17243A)
-private val KaamMuted = Color(0xFF78869B)
-private val KaamBackground = Color(0xFFF7F9FC)
-private val KaamGreen = Color(0xFF16A765)
-
 @Composable
 fun ReportSavedScreen(
     customerName: String,
@@ -34,8 +27,12 @@ fun ReportSavedScreen(
     onCreateAnotherClick: () -> Unit,
     onHomeClick: () -> Unit
 ) {
+    val colors = MaterialTheme.colorScheme
+    val kaamGreen = Color(0xFF16A765)
+
     Scaffold(
-        containerColor = KaamBackground
+        containerColor = colors.background,
+        contentWindowInsets = WindowInsets(0, 0, 0, 0)
     ) { innerPadding ->
 
         Column(
@@ -52,7 +49,7 @@ fun ReportSavedScreen(
             Box(
                 modifier = Modifier
                     .size(88.dp)
-                    .background(KaamGreen, CircleShape),
+                    .background(kaamGreen, CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -69,7 +66,7 @@ fun ReportSavedScreen(
                 text = "Report Saved!",
                 fontSize = 27.sp,
                 fontWeight = FontWeight.Bold,
-                color = KaamText
+                color = colors.onBackground
             )
 
             Spacer(Modifier.height(8.dp))
@@ -77,7 +74,7 @@ fun ReportSavedScreen(
             Text(
                 text = "Your visit report has been saved successfully.",
                 fontSize = 14.sp,
-                color = KaamMuted,
+                color = colors.onSurfaceVariant,
                 lineHeight = 21.sp
             )
 
@@ -88,7 +85,7 @@ fun ReportSavedScreen(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(18.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color.White
+                    containerColor = colors.surface
                 ),
                 elevation = CardDefaults.cardElevation(1.dp)
             ) {
@@ -102,7 +99,7 @@ fun ReportSavedScreen(
                             modifier = Modifier
                                 .size(42.dp)
                                 .background(
-                                    Color(0xFFEAF3FF),
+                                    colors.surfaceVariant,
                                     RoundedCornerShape(12.dp)
                                 ),
                             contentAlignment = Alignment.Center
@@ -110,7 +107,7 @@ fun ReportSavedScreen(
                             Icon(
                                 imageVector = Icons.Default.Storefront,
                                 contentDescription = null,
-                                tint = KaamBlue
+                                tint = colors.primary
                             )
                         }
 
@@ -123,33 +120,33 @@ fun ReportSavedScreen(
                                 },
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = KaamText
+                                color = colors.onSurface
                             )
 
                             Text(
                                 text = "Visit report",
                                 fontSize = 12.sp,
-                                color = KaamMuted
+                                color = colors.onSurfaceVariant
                             )
                         }
 
                         Icon(
                             imageVector = Icons.Default.Check,
                             contentDescription = "Saved",
-                            tint = KaamGreen
+                            tint = kaamGreen
                         )
                     }
 
                     HorizontalDivider(
                         modifier = Modifier.padding(vertical = 16.dp),
-                        color = Color(0xFFEDF0F5)
+                        color = colors.outline
                     )
 
                     Row(verticalAlignment = Alignment.Top) {
                         Icon(
                             imageVector = Icons.Default.Inventory2,
                             contentDescription = null,
-                            tint = KaamBlue,
+                            tint = colors.primary,
                             modifier = Modifier.size(20.dp)
                         )
 
@@ -159,7 +156,7 @@ fun ReportSavedScreen(
                             Text(
                                 text = "Visit notes",
                                 fontSize = 12.sp,
-                                color = KaamMuted
+                                color = colors.onSurfaceVariant
                             )
 
                             Spacer(Modifier.height(4.dp))
@@ -169,7 +166,7 @@ fun ReportSavedScreen(
                                     "No notes added"
                                 },
                                 fontSize = 14.sp,
-                                color = KaamText,
+                                color = colors.onSurface,
                                 lineHeight = 20.sp
                             )
                         }
@@ -181,7 +178,7 @@ fun ReportSavedScreen(
                         Icon(
                             imageVector = Icons.Default.CalendarMonth,
                             contentDescription = null,
-                            tint = KaamBlue,
+                            tint = colors.primary,
                             modifier = Modifier.size(20.dp)
                         )
 
@@ -191,14 +188,14 @@ fun ReportSavedScreen(
                             Text(
                                 text = "Follow-up",
                                 fontSize = 12.sp,
-                                color = KaamMuted
+                                color = colors.onSurfaceVariant
                             )
 
                             Text(
                                 text = "Schedule when needed",
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Medium,
-                                color = KaamText
+                                color = colors.onSurface
                             )
                         }
                     }
@@ -215,7 +212,7 @@ fun ReportSavedScreen(
                     .height(52.dp),
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = KaamBlue
+                    containerColor = colors.primary
                 )
             ) {
                 Text(
@@ -234,7 +231,7 @@ fun ReportSavedScreen(
             ) {
                 Text(
                     text = "Back to Home",
-                    color = KaamBlue,
+                    color = colors.primary,
                     fontWeight = FontWeight.SemiBold
                 )
             }

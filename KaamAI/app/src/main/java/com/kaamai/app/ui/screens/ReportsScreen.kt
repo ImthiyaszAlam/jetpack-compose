@@ -4,29 +4,21 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Description
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Storefront
-import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kaamai.app.data.ReportItem
-
-private val KaamBlue = Color(0xFF0866F5)
-private val KaamText = Color(0xFF17243A)
-private val KaamMuted = Color(0xFF78869B)
-private val KaamBackground = Color(0xFFF7F9FC)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,6 +28,8 @@ fun ReportsScreen(
 ) {
     var searchQuery by remember { mutableStateOf("") }
     var selectedFilter by remember { mutableStateOf("All") }
+
+    val colors = MaterialTheme.colorScheme
 
     val reports = remember {
         listOf(
@@ -94,13 +88,14 @@ fun ReportsScreen(
                 title = {
                     Text(
                         text = "Reports",
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = colors.onBackground
                     )
                 },
                 windowInsets = WindowInsets(0, 0, 0, 0)
             )
         },
-        containerColor = KaamBackground,
+        containerColor = colors.background,
         contentWindowInsets = WindowInsets(0, 0, 0, 0)
     ) { innerPadding ->
         Column(
@@ -127,16 +122,16 @@ fun ReportsScreen(
                     Icon(
                         Icons.Default.Search,
                         contentDescription = "Search",
-                        tint = KaamMuted
+                        tint = colors.onSurfaceVariant
                     )
                 },
                 singleLine = true,
                 shape = RoundedCornerShape(14.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedContainerColor = Color.White,
-                    focusedContainerColor = Color.White,
-                    unfocusedBorderColor = Color(0xFFE4EAF2),
-                    focusedBorderColor = KaamBlue
+                    unfocusedContainerColor = colors.surface,
+                    focusedContainerColor = colors.surface,
+                    unfocusedBorderColor = colors.outline,
+                    focusedBorderColor = colors.primary
                 )
             )
 
@@ -147,7 +142,7 @@ fun ReportsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(
-                        Color(0xFFEAF0F8),
+                        colors.surfaceVariant,
                         RoundedCornerShape(50.dp)
                     )
                     .padding(4.dp),
@@ -160,8 +155,8 @@ fun ReportsScreen(
                         onClick = { selectedFilter = filter },
                         modifier = Modifier.weight(1f),
                         shape = RoundedCornerShape(50.dp),
-                        color = if (selected) KaamBlue
-                        else Color.Transparent
+                        color = if (selected) colors.primary
+                        else colors.surfaceVariant
                     ) {
                         Box(
                             modifier = Modifier.padding(
@@ -174,8 +169,8 @@ fun ReportsScreen(
                                 text = filter,
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.SemiBold,
-                                color = if (selected) Color.White
-                                else KaamText
+                                color = if (selected) colors.onPrimary
+                                else colors.onSurface
                             )
                         }
                     }
@@ -187,7 +182,7 @@ fun ReportsScreen(
             Text(
                 text = "${filteredReports.size} reports",
                 fontSize = 13.sp,
-                color = KaamMuted
+                color = colors.onSurfaceVariant
             )
 
             Spacer(Modifier.height(10.dp))
@@ -203,7 +198,7 @@ fun ReportsScreen(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color.White
+                            containerColor = colors.surface
                         ),
                         elevation = CardDefaults.cardElevation(1.dp),
                         onClick = {
@@ -218,7 +213,7 @@ fun ReportsScreen(
                                 modifier = Modifier
                                     .size(46.dp)
                                     .background(
-                                        Color(0xFFEAF3FF),
+                                        colors.surfaceVariant,
                                         RoundedCornerShape(14.dp)
                                     ),
                                 contentAlignment = Alignment.Center
@@ -226,7 +221,7 @@ fun ReportsScreen(
                                 Icon(
                                     Icons.Default.Storefront,
                                     contentDescription = null,
-                                    tint = KaamBlue
+                                    tint = colors.primary
                                 )
                             }
 
@@ -239,7 +234,7 @@ fun ReportsScreen(
                                     text = report.customer,
                                     fontSize = 14.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = KaamText,
+                                    color = colors.onSurface,
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )
@@ -249,7 +244,7 @@ fun ReportsScreen(
                                 Text(
                                     text = report.notes,
                                     fontSize = 12.sp,
-                                    color = KaamMuted,
+                                    color = colors.onSurfaceVariant,
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )
@@ -259,14 +254,14 @@ fun ReportsScreen(
                                 Text(
                                     text = report.date,
                                     fontSize = 11.sp,
-                                    color = KaamMuted
+                                    color = colors.onSurfaceVariant
                                 )
                             }
 
                             Icon(
                                 Icons.Default.ChevronRight,
                                 contentDescription = "View report",
-                                tint = KaamMuted
+                                tint = colors.onSurfaceVariant
                             )
                         }
                     }
@@ -283,7 +278,7 @@ fun ReportsScreen(
                             Icon(
                                 Icons.Default.Description,
                                 contentDescription = null,
-                                tint = KaamMuted,
+                                tint = colors.onSurfaceVariant,
                                 modifier = Modifier.size(40.dp)
                             )
 
@@ -292,12 +287,12 @@ fun ReportsScreen(
                             Text(
                                 text = "No reports found",
                                 fontWeight = FontWeight.SemiBold,
-                                color = KaamText
+                                color = colors.onSurface
                             )
 
                             Text(
                                 text = "Try another search or filter.",
-                                color = KaamMuted,
+                                color = colors.onSurfaceVariant,
                                 fontSize = 13.sp
                             )
                         }

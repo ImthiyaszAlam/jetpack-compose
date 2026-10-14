@@ -20,11 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kaamai.app.viewmodel.KaamAIViewModel
 
-private val KaamBlue = Color(0xFF0866F5)
-private val KaamBackground = Color(0xFFF7F9FC)
-private val KaamText = Color(0xFF17243A)
-private val KaamMuted = Color(0xFF78869B)
-
 @Composable
 fun HomeScreen(
     viewModel: KaamAIViewModel,
@@ -35,10 +30,12 @@ fun HomeScreen(
     val customer = viewModel.customer
     val notes = viewModel.notes
 
+    val colors = MaterialTheme.colorScheme
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(KaamBackground)
+            .background(colors.background)
             .padding(horizontal = 20.dp)
     ) {
         Spacer(Modifier.height(20.dp))
@@ -47,13 +44,13 @@ fun HomeScreen(
             text = "KaamAI",
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
-            color = KaamText
+            color = colors.onBackground
         )
 
         Text(
             text = "Your workday, made simpler.",
             fontSize = 13.sp,
-            color = KaamMuted
+            color = colors.onSurfaceVariant
         )
 
         Spacer(Modifier.height(24.dp))
@@ -67,7 +64,7 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(22.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = Color(0xFFEAF3FF)
+                        containerColor = colors.surfaceVariant
                     )
                 ) {
                     Column(
@@ -77,7 +74,7 @@ fun HomeScreen(
                             text = "✦  YOUR FIELDWORK ASSISTANT",
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
-                            color = KaamBlue,
+                            color = colors.primary,
                             letterSpacing = 1.sp
                         )
 
@@ -88,7 +85,7 @@ fun HomeScreen(
                             fontSize = 27.sp,
                             lineHeight = 33.sp,
                             fontWeight = FontWeight.Bold,
-                            color = KaamText
+                            color = colors.onSurface
                         )
 
                         Spacer(Modifier.height(8.dp))
@@ -98,7 +95,7 @@ fun HomeScreen(
                                     "daily work organised.",
                             fontSize = 14.sp,
                             lineHeight = 21.sp,
-                            color = Color(0xFF52647D)
+                            color = colors.onSurfaceVariant
                         )
 
                         Spacer(Modifier.height(20.dp))
@@ -116,7 +113,7 @@ fun HomeScreen(
                                 .height(52.dp),
                             shape = RoundedCornerShape(12.dp),
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = KaamBlue
+                                containerColor = colors.primary
                             )
                         ) {
                             Icon(
@@ -140,7 +137,7 @@ fun HomeScreen(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(18.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color.White
+                            containerColor = colors.surface
                         )
                     ) {
                         Column(
@@ -150,7 +147,7 @@ fun HomeScreen(
                                 text = "New Visit Report",
                                 fontSize = 19.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = KaamText
+                                color = colors.onSurface
                             )
 
                             Spacer(Modifier.height(12.dp))
@@ -193,7 +190,7 @@ fun HomeScreen(
                                     .height(48.dp),
                                 shape = RoundedCornerShape(12.dp),
                                 colors = ButtonDefaults.buttonColors(
-                                    containerColor = KaamBlue
+                                    containerColor = colors.primary
                                 )
                             ) {
                                 Text("Save Report")
@@ -215,13 +212,13 @@ fun HomeScreen(
                         text = "Recent reports",
                         fontSize = 19.sp,
                         fontWeight = FontWeight.Bold,
-                        color = KaamText
+                        color = colors.onSurface
                     )
 
                     Text(
                         text = "${reports.size} reports",
                         fontSize = 12.sp,
-                        color = KaamBlue
+                        color = colors.primary
                     )
                 }
             }
@@ -232,7 +229,7 @@ fun HomeScreen(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color.White
+                            containerColor = colors.surface
                         )
                     ) {
                         Column(
@@ -245,7 +242,7 @@ fun HomeScreen(
                                 modifier = Modifier
                                     .size(52.dp)
                                     .background(
-                                        Color(0xFFEAF3FF),
+                                        colors.surfaceVariant,
                                         CircleShape
                                     ),
                                 contentAlignment = Alignment.Center
@@ -253,7 +250,7 @@ fun HomeScreen(
                                 Icon(
                                     imageVector = Icons.Default.Storefront,
                                     contentDescription = null,
-                                    tint = KaamBlue
+                                    tint = colors.primary
                                 )
                             }
 
@@ -262,7 +259,7 @@ fun HomeScreen(
                             Text(
                                 text = "No reports yet",
                                 fontWeight = FontWeight.SemiBold,
-                                color = KaamText
+                                color = colors.onSurface
                             )
 
                             Spacer(Modifier.height(4.dp))
@@ -270,7 +267,7 @@ fun HomeScreen(
                             Text(
                                 text = "Your customer visits will appear here.",
                                 fontSize = 13.sp,
-                                color = KaamMuted
+                                color = colors.onSurfaceVariant
                             )
                         }
                     }
@@ -281,7 +278,7 @@ fun HomeScreen(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color.White
+                            containerColor = colors.surface
                         ),
                         elevation = CardDefaults.cardElevation(1.dp)
                     ) {
@@ -293,7 +290,7 @@ fun HomeScreen(
                                 modifier = Modifier
                                     .size(46.dp)
                                     .background(
-                                        Color(0xFFEAF3FF),
+                                        colors.surfaceVariant,
                                         RoundedCornerShape(14.dp)
                                     ),
                                 contentAlignment = Alignment.Center
@@ -301,7 +298,7 @@ fun HomeScreen(
                                 Icon(
                                     imageVector = Icons.Default.Storefront,
                                     contentDescription = null,
-                                    tint = KaamBlue
+                                    tint = colors.primary
                                 )
                             }
 
@@ -314,7 +311,7 @@ fun HomeScreen(
                                     text = report.customer,
                                     fontSize = 15.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = KaamText,
+                                    color = colors.onSurface,
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )
@@ -324,7 +321,7 @@ fun HomeScreen(
                                 Text(
                                     text = report.notes,
                                     fontSize = 12.sp,
-                                    color = KaamMuted,
+                                    color = colors.onSurfaceVariant,
                                     maxLines = 2,
                                     overflow = TextOverflow.Ellipsis
                                 )
@@ -335,7 +332,7 @@ fun HomeScreen(
                             Text(
                                 text = "›",
                                 fontSize = 28.sp,
-                                color = KaamMuted
+                                color = colors.onSurfaceVariant
                             )
                         }
                     }

@@ -19,11 +19,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-private val KaamBlue = Color(0xFF0866F5)
-private val KaamBackground = Color(0xFFF7F9FC)
-private val KaamText = Color(0xFF17243A)
-private val KaamMuted = Color(0xFF78869B)
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewVisitScreen(
@@ -34,27 +29,31 @@ fun NewVisitScreen(
     var notes by remember { mutableStateOf("") }
     var speakMode by remember { mutableStateOf(true) }
 
+    val colors = MaterialTheme.colorScheme
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
                         text = "New Visit Report",
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = colors.onBackground
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = "Back",
+                            tint = colors.onSurface
                         )
                     }
                 },
                 windowInsets = WindowInsets(0, 0, 0, 0)
             )
         },
-        containerColor = KaamBackground,
+        containerColor = colors.background,
         contentWindowInsets = WindowInsets(0, 0, 0, 0)
     ) { innerPadding ->
         Column(
@@ -69,7 +68,7 @@ fun NewVisitScreen(
             Text(
                 text = "Capture your customer visit in seconds.",
                 fontSize = 14.sp,
-                color = KaamMuted
+                color = colors.onSurfaceVariant
             )
 
             Spacer(Modifier.height(22.dp))
@@ -79,7 +78,7 @@ fun NewVisitScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(
-                        Color(0xFFE8EEF7),
+                        colors.surfaceVariant,
                         RoundedCornerShape(14.dp)
                     )
                     .padding(4.dp)
@@ -123,19 +122,19 @@ fun NewVisitScreen(
                 Surface(
                     modifier = Modifier.size(100.dp),
                     shape = CircleShape,
-                    color = Color(0xFFDCEAFF)
+                    color = colors.surfaceVariant
                 ) {
                     Box(contentAlignment = Alignment.Center) {
                         Surface(
                             modifier = Modifier.size(72.dp),
                             shape = CircleShape,
-                            color = KaamBlue
+                            color = colors.primary
                         ) {
                             Box(contentAlignment = Alignment.Center) {
                                 Icon(
                                     imageVector = Icons.Default.Mic,
                                     contentDescription = "Microphone",
-                                    tint = Color.White,
+                                    tint = colors.onPrimary,
                                     modifier = Modifier.size(32.dp)
                                 )
                             }
@@ -152,7 +151,7 @@ fun NewVisitScreen(
                         "Enter your visit details below"
                     },
                     fontSize = 13.sp,
-                    color = KaamMuted
+                    color = colors.onSurfaceVariant
                 )
             }
 
@@ -162,14 +161,14 @@ fun NewVisitScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.White, RoundedCornerShape(18.dp))
+                    .background(colors.surface, RoundedCornerShape(18.dp))
                     .padding(16.dp)
             ) {
                 Text(
                     text = "Customer name",
                     fontSize = 13.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = KaamText
+                    color = colors.onSurface
                 )
 
                 Spacer(Modifier.height(8.dp))
@@ -189,7 +188,7 @@ fun NewVisitScreen(
                     text = "Visit notes",
                     fontSize = 13.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = KaamText
+                    color = colors.onSurface
                 )
 
                 Spacer(Modifier.height(8.dp))
@@ -217,7 +216,7 @@ fun NewVisitScreen(
                         .height(50.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = KaamBlue
+                        containerColor = colors.primary
                     )
                 ) {
                     Text(
@@ -233,7 +232,7 @@ fun NewVisitScreen(
                 onClick = onBackClick,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
-                Text("Cancel", color = KaamMuted)
+                Text("Cancel", color = colors.onSurfaceVariant)
             }
 
             Spacer(Modifier.height(24.dp))
@@ -249,11 +248,13 @@ private fun ModeButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
+    val colors = MaterialTheme.colorScheme
+
     Surface(
         onClick = onClick,
         modifier = modifier.height(44.dp),
         shape = RoundedCornerShape(11.dp),
-        color = if (selected) KaamBlue else Color.Transparent
+        color = if (selected) colors.primary else Color.Transparent
     ) {
         Row(
             modifier = Modifier.fillMaxSize(),
@@ -262,7 +263,7 @@ private fun ModeButton(
         ) {
             CompositionLocalProvider(
                 LocalContentColor provides
-                        if (selected) Color.White else KaamText
+                        if (selected) colors.onPrimary else colors.onSurface
             ) {
                 icon()
                 Spacer(Modifier.width(7.dp))
