@@ -23,7 +23,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.kaamai.app.ui.screens.HomeScreen
 import com.kaamai.app.ui.screens.NewVisitScreen
+import com.kaamai.app.ui.screens.ReportDetailsScreen
 import com.kaamai.app.ui.screens.ReportsScreen
+import com.kaamai.app.ui.screens.ReviewConfirmScreen
 import com.kaamai.app.viewmodel.KaamAIViewModel
 import kotlinx.coroutines.launch
 
@@ -31,8 +33,12 @@ import kotlinx.coroutines.launch
 @Composable
 fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
     val navController = rememberNavController()
+    var selectedCustomer by remember { mutableStateOf("") }
+    var selectedNotes by remember { mutableStateOf("") }
+
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -87,6 +93,7 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
                     TopAppBar(
                         title = {
                             when (currentRoute) {
+
                                 KaamAIScreen.Reports.route -> {
                                     Text(
                                         text = "Reports",
@@ -97,6 +104,13 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
                                 KaamAIScreen.NewVisit.route -> {
                                     Text(
                                         text = "New Visit Report",
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
+
+                                KaamAIScreen.CustomerReportDetails.route -> {
+                                    Text(
+                                        text = "Customer Report",
                                         fontWeight = FontWeight.Bold
                                     )
                                 }
@@ -222,10 +236,16 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
                 modifier = Modifier.padding(innerPadding)
             ) {
                 composable(KaamAIScreen.Home.route) {
+
                     HomeScreen(
                         viewModel = viewModel,
                         onStartNewVisit = {
                             navController.navigate(KaamAIScreen.NewVisit.route)
+                        },
+                        onReportClick = { customer, notes ->
+                            selectedCustomer = customer
+                            selectedNotes = notes
+                            navController.navigate(KaamAIScreen.CustomerReportDetails.route)
                         }
                     )
                 }
@@ -235,14 +255,72 @@ fun KaamAINavGraph(viewModel: KaamAIViewModel = viewModel()) {
                             navController.navigate(KaamAIScreen.Home.route) {
                                 popUpTo(KaamAIScreen.Home.route) { inclusive = true }
                             }
+                        },
+                        onReportClick = { customer, notes ->
+                            selectedCustomer = customer
+                            selectedNotes = notes
+                            navController.navigate(KaamAIScreen.CustomerReportDetails.route)
                         }
                     )
                 }
+
                 composable(KaamAIScreen.NewVisit.route) {
                     NewVisitScreen(
                         onBackClick = { navController.popBackStack() },
                         onSaveClick = { customer, notes ->
-                            viewModel.addReport(customer, notes)
+                            viewModel.updateCustomer(customer)
+                            viewModel.updateNotes(notes)
+
+                            navController.navigate(KaamAIScreen.ReviewConfirm.route)
+                        }
+                    )
+                }
+
+                composable(KaamAIScreen.CustomerReportDetails.route) {
+                    ReportDetailsScreen(
+                        customerName = selectedCustomer,
+                        visitNotes = selectedNotes,
+                        onBackClick = {
+                            navController.popBackStack()
+                        },
+                        onSaveClick = {
+                            viewModel.addReport(
+                                viewModel.customer,
+                                viewModel.notes
+                            )
+                            navController.navigate(KaamAIScreen.Home.route) {
+                                popUpTo(KaamAIScreen.Home.route) {
+                                    inclusive = false
+                                }
+                                launchSingleTop = true
+                            }
+                        },
+                        onEditClick = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
+
+                composable(KaamAIScreen.ReviewConfirm.route) {
+                    ReviewConfirmScreen(
+                        customerName = viewModel.customer,
+                        visitNotes = viewModel.notes,
+                        onBackClick = {
+                            navController.popBackStack()
+                        },
+                        onSaveClick = {
+                            viewModel.addReport(
+                                viewModel.customer,
+                                viewModel.notes
+                            )
+                            navController.navigate(KaamAIScreen.Home.route) {
+                                popUpTo(KaamAIScreen.Home.route) {
+                                    inclusive = false
+                                }
+                                launchSingleTop = true
+                            }
+                        },
+                        onEditClick = {
                             navController.popBackStack()
                         }
                     )

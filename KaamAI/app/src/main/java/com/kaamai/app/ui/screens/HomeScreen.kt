@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kaamai.app.components.ReportCard
 import com.kaamai.app.viewmodel.KaamAIViewModel
 
 @Composable
@@ -243,69 +244,14 @@ fun HomeScreen(
 
 
                 items(reports) { report ->
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(8.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = colors.surface
-                        ),
-                        elevation = CardDefaults.cardElevation(1.dp),
+
+                    ReportCard(
+                        customer = report.customer,
+                        notes = report.notes,
                         onClick = {
                             onReportClick(report.customer, report.notes)
                         }
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .size(46.dp)
-                                    .background(
-                                        colors.surfaceVariant,
-                                        RoundedCornerShape(50.dp)
-                                    ),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    Icons.Default.Storefront,
-                                    contentDescription = null,
-                                    tint = colors.primary
-                                )
-                            }
-
-                            Spacer(Modifier.width(12.dp))
-                            Column(
-                                modifier = Modifier.weight(1f),
-                                verticalArrangement = Arrangement.spacedBy(2.dp)
-                            ) {
-                                Text(
-                                    text = report.customer,
-                                    fontSize = 14.sp,
-                                    lineHeight = 16.sp,
-                                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                                    color = colors.onSurface,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-
-                                Text(
-                                    text = report.notes,
-                                    fontSize = 12.sp,
-                                    lineHeight = 14.sp,
-                                    color = colors.onSurfaceVariant,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                            }
-
-                            Icon(
-                                Icons.Default.ChevronRight,
-                                contentDescription = "View report",
-                                tint = colors.onSurfaceVariant
-                            )
-                        }
-                    }
+                    )
                 }
             }
 

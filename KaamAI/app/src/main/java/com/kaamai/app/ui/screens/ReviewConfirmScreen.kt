@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kaamai.app.components.DetailRow
 
 @Composable
 fun ReviewConfirmScreen(
@@ -102,7 +103,9 @@ fun ReviewConfirmScreen(
                 containerColor = colors.surface
             ),
             elevation = CardDefaults.cardElevation(1.dp)
-        ) {
+        )
+
+        {
             Column {
                 DetailRow(
                     icon = {
@@ -182,7 +185,9 @@ fun ReviewConfirmScreen(
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
+        )
+
+        {
             Button(
                 onClick = onSaveClick,
                 modifier = Modifier
@@ -220,68 +225,8 @@ fun ReviewConfirmScreen(
                 )
             }
         }
+
     }
 }
 
-@Composable
-private fun DetailRow(
-    icon: @Composable () -> Unit,
-    label: String,
-    value: String,
-    editable: Boolean,
-    onValueChange: (String) -> Unit
-) {
-    val colors = MaterialTheme.colorScheme
 
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        verticalAlignment = Alignment.Top
-    ) {
-        Box(
-            modifier = Modifier
-                .size(38.dp)
-                .background(
-                    colors.surfaceVariant,
-                    RoundedCornerShape(50.dp)
-                ),
-            contentAlignment = Alignment.Center
-        ) {
-            icon()
-        }
-
-        Spacer(Modifier.width(12.dp))
-
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = label,
-                fontSize = 12.sp,
-                color = colors.onSurfaceVariant
-            )
-
-            Spacer(Modifier.height(5.dp))
-
-            if (editable) {
-                OutlinedTextField(
-                    value = value,
-                    onValueChange = onValueChange,
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(50.dp),
-                    textStyle = LocalTextStyle.current.copy(
-                        fontSize = 14.sp,
-                        color = colors.onSurface
-                    )
-                )
-            } else {
-                Text(
-                    text = value.ifBlank { "Not provided" },
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = colors.onSurface,
-                    lineHeight = 20.sp
-                )
-            }
-        }
-    }
-}
